@@ -228,19 +228,19 @@ const CommunicationList: React.FC = () => {
     setCurrentPage(0);
     setResetTypeFlag(true);
     if (type == COMMUNICATION_TYPE.SMS) {
-      navigate('/templates/sms');
+      navigate('/sms');
       dispatch(fetchSmsEvents(accessToken, PageSize, 0));
     }
     if (type == COMMUNICATION_TYPE.Email) {
-      navigate('/templates/email');
+      navigate('/email');
       dispatch(fetchallEmailEvents(accessToken, PageSize, 0));
     }
     if (type == COMMUNICATION_TYPE.Transactional_Push_notification) {
-      navigate('/templates/transaction');
+      navigate('/transaction');
       dispatch(fetchPushNotificationEvents(accessToken, PageSize, 0));
     }
     if (type == COMMUNICATION_TYPE.Whatsapp) {
-      navigate('/templates/whatsapp');
+      navigate('/whatsapp');
       dispatch(fetchWhatsAppEvents(accessToken, PageSize, 0));
     }
   }, [type]);
