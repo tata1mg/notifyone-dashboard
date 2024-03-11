@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FormattedMessage } from 'react-intl';
 
-import { isAuthorize, isAuthorizeMultiRoles } from 'common/src/hoc/authorize';
-import Roles from 'common/src/roles_mapping/roles';
+import { isAuthorize, isAuthorizeMultiRoles } from 'src/common/hoc/authorize';
+import ROLES from 'src/common/roles_mapping/roles';
 
 interface MenuPropsType {
   backgroundTheme?: string;
@@ -69,7 +69,7 @@ const Menu = (props: MenuPropsType) => {
         }: any) => {
           const displayName = <FormattedMessage id={name} />;
           let image: any;
-          if (role && !isAuthorize(Roles[role], deprecated)) {
+          if (role && !isAuthorize(ROLES[role], deprecated)) {
             if (role.length > 0 && !isAuthorizeMultiRoles(role, deprecated))
               return null;
           }

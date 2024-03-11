@@ -5,8 +5,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FormattedMessage } from 'react-intl';
 
-import { isAuthorize } from 'src/common/hoc/authorize';
-import Roles from 'src/common/roles_mapping/roles';
+interface MenuItemType {
+  name: string;
+  icon?: string;
+  link?: string;
+  role?: string;
+  items?: any[];
+  deprecated?: boolean;
+}
 
 interface MenuPropsType {
   backgroundTheme?: string;
@@ -40,29 +46,14 @@ const Menu = (props: MenuPropsType) => {
   return (
     <AntdMenu data-testid="custom-menu" {...rest}>
       {menuList.map(
-        ({
-          items,
-          link,
-          icon,
-          name,
-          key = '',
-          iconType,
-          role,
-          deprecated = false,
-        }: any) => {
+        ({ items, link, icon, name, deprecated = false }: MenuItemType) => {
           const displayName = <FormattedMessage id={name} />;
           let image: any;
 
-          if (role && !isAuthorize(Roles[role], deprecated)) {
-            return null;
-          }
-
-          if (icon && iconType == 'font-awesome') {
+          if (icon) {
             image = (
               <FontAwesomeIcon className={textTheme} icon={icon as IconProp} />
             );
-          } else if (icon) {
-            image = Icon({ type: icon, textTheme });
           }
 
           if (items) {
@@ -78,7 +69,12 @@ const Menu = (props: MenuPropsType) => {
                   let image: any;
 
                   if (icon) {
-                    image = Icon({ type: icon });
+                    image = (
+                      <FontAwesomeIcon
+                        className={textTheme}
+                        icon={icon as IconProp}
+                      />
+                    );
                   }
 
                   if (link) {

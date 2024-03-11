@@ -52,7 +52,7 @@ const Authorize = (props: UserRolesType, deprecated = false) => {
   const { roles } = props;
 
   let couldShow = !!roles?.reduce((userRoles: any, role: any) => {
-    if (userRoles[role]) {
+    if (userRoles && userRoles[role]) {
       return userRoles[role];
     }
 
@@ -99,7 +99,7 @@ export const isAuthorizedCard = (
 export const isAuthorize = (roles: string[], deprecated = false) => {
   const userRoles = useSelector((state: any) => state?.user?.roles);
   let couldShow = !!roles?.reduce((userRoles: any, role: any) => {
-    if (userRoles[role]) {
+    if (userRoles && userRoles[role]) {
       return userRoles[role];
     }
 
