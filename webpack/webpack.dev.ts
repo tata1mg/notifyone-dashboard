@@ -8,8 +8,8 @@ module.exports = {
   devtool: 'cheap-module-source-map',
   devServer: {
     static: path.join(__dirname, 'build'),
-    // historyApiFallback: true,
-    port:  8000,
+    historyApiFallback: true,
+    port: 8000,
     allowedHosts: [AppConfig.communication.appUrl || '*'],
     open: true,
     // hot: true,
