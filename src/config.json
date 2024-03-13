@@ -19,7 +19,7 @@
     "sentry": {
       "dns": ""
     },
-    "serverDomain": "https://plutointernalapi.1mg.com/",
+    "serverDomain": "http://localhost:9402",
     "smsEvents": "wallet_api/sms/templates",
     "smsEventsUpdate": "wallet_api/sms/template",
     "tata1mgLogo": "",
@@ -70,7 +70,7 @@
     "base_labs_url": "https://pluto.1mg.com/labs/admin",
     "auth_api_url": "https://plutointernalapi.1mg.com/auth",
     "base_dmg_url": "https://pluto.1mg.com",
-    "base_notification_url": "https://plutointernalapi.1mg.com",
+    "base_notification_url": "http://localhost:9402",
     "base_site_url": "0.0.0.0",
     "google_client_id": "636386266577-mksatrgqp8e9urtk67loc95uqub9ntpl.apps.googleusercontent.com",
     "jwt_secret": "WqGfoEqsK3wPBsqxY1RH9XlV15wk4n46",

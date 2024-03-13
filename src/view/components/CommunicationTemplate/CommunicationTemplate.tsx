@@ -406,7 +406,7 @@ const CommunicationTemplate: React.FC<CommunicationTemplateProps> = ({
     }
 
     dispatch(removeToCurrentEvent());
-    navigate(`/communication/templates${redirect}`);
+    navigate(`/templates${redirect}`);
   };
 
   const onInclude = (option: any) => {

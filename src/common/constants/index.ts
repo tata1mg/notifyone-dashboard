@@ -13,4 +13,4 @@ export const AUTH_ROLES = 'LARA_ADMIN';
 export const EVENT_FETCH_LIMIT = 50;
 
 // Navigation
-export const COMS_TEMPLATE_NAVIGATE = '/communication/template';
+export const COMS_TEMPLATE_NAVIGATE = '/template';

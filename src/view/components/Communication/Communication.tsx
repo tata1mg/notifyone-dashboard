@@ -47,25 +47,13 @@ const Communication: React.FC = () => {
 
   useEffect(() => {
     if (!currentEvent) {
-      if (
-        location.pathname.startsWith('/communication/template/email/') &&
-        id
-      ) {
+      if (location.pathname.startsWith('/template/email/') && id) {
         dispatch(fetchCurrentEmailEvent(accessToken, parseInt(id)));
-      } else if (
-        location.pathname.startsWith('/communication/template/sms/') &&
-        id
-      ) {
+      } else if (location.pathname.startsWith('/template/sms/') && id) {
         dispatch(fetchCurrentSmsEvent(accessToken, parseInt(id)));
-      } else if (
-        location.pathname.startsWith('/communication/template/transaction/') &&
-        id
-      ) {
+      } else if (location.pathname.startsWith('/template/transaction/') && id) {
         dispatch(fetchCurrentPushEvent(accessToken, parseInt(id)));
-      } else if (
-        location.pathname.startsWith('/communication/template/whatsapp/') &&
-        id
-      ) {
+      } else if (location.pathname.startsWith('/template/whatsapp/') && id) {
         dispatch(fetchCurrentWhatsappEvent(accessToken, parseInt(id)));
       }
     }

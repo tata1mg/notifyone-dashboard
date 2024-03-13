@@ -44,31 +44,6 @@
     "link": "/templates"
   },
   {
-    "name": "raven",
-    "icon": "MedicineBoxOutlined",
-    "role": "COMMUNICATION_RAVEN",
-    "children": [
-      {
-        "name": "root_node",
-        "icon": "NodeExpandOutlined",
-        "link": "/raven",
-        "role": "COMMUNICATION_RAVEN"
-      },
-      {
-        "name": "create_node_action",
-        "icon": "SisternodeOutlined",
-        "link": "/raven/action/create",
-        "role": "COMMUNICATION_RAVEN"
-      },
-      {
-        "name": "create_node",
-        "icon": "SubnodeOutlined",
-        "link": "/raven/node/create",
-        "role": "COMMUNICATION_RAVEN"
-      }
-    ]
-  },
-  {
     "name": "logout",
     "icon": "LogoutOutlined",
     "link": "/logout"

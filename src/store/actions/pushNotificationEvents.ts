@@ -245,7 +245,7 @@ export const updatePushNotificationEvent = (
         const success = response.success;
         dispatch(updatePushNotificationEventsSuccess(success));
         dispatch(removeToCurrentEvent());
-        navigate(`/communication/templates${redirect}`);
+        navigate(`/templates${redirect}`);
       })
       .catch((error: any) => {
         toast.error(

@@ -38,8 +38,8 @@ export function notificationProxy() {
           logger.info(
             `user is trying to proxy ${SERVICE_IDENTIFIER.NOTIFICATION_CORE}`
           );
-          proxyReq.headers = proxyReq.headers ?? {};
-          proxyReq.headers.Authorization = decodedToken.auth_token;
+          // proxyReq.headers = proxyReq.headers ?? {};
+          // proxyReq.headers.Authorization = decodedToken.auth_token;
         } catch (error) {
           logger.error(
             `${JWT_DECODE_AT_PROXY} ${SERVICE_IDENTIFIER.NOTIFICATION_CORE}`

@@ -434,7 +434,7 @@ export const updateEmailEvent = (
         const success = response.success;
         dispatch(updateEmailEventsSuccess(success));
         dispatch(removeToCurrentEvent());
-        navigate(`/communication/templates${redirect}`);
+        navigate(`/templates${redirect}`);
       })
       .catch((error: any) => {
         toast.error(
