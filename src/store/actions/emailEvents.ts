@@ -270,12 +270,7 @@ export const fetchallEmailEvents = (
 
     axios
       .get(
-        `${AppConfig.serverDomain}notification_core/v4/events?channel=email&size=${currentPageSize}&start=${templatesSize}`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
+        `${AppConfig.serverDomain}/events?channel=email&size=${currentPageSize}&start=${templatesSize}`
       )
       .then((response: any) => {
         const data = response?.data?.data?.email;
@@ -458,14 +453,7 @@ export const fetchEmailEventDetails = (
 ) => {
   return (dispatch: EmailDispatchType) => {
     axios
-      .get(
-        `${AppConfig.serverDomain}notification_core/v4/events?channel=${event_type}`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      )
+      .get(`${AppConfig.serverDomain}/events?channel=${event_type}`)
       .then((response: any) => {
         const data = response?.data?.data?.email;
         dispatch(fetchEmailIdTemplatesSuccess(data));

@@ -109,14 +109,7 @@ export const fetchWhatsappEventDetails = (
 ) => {
   return (dispatch: EmailDispatchType) => {
     axios
-      .get(
-        `${AppConfig.serverDomain}notification_core/v4/events?channel=${event_type}`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      )
+      .get(`${AppConfig.serverDomain}/events?channel=${event_type}`)
       .then((response: any) => {
         const data = response?.data?.data?.whatsapp;
         dispatch(fetchWhatsappTemplatesSuccess(data));
@@ -148,12 +141,7 @@ export const fetchWhatsAppEvents = (
     dispatch(fetchWhatsAppEventsRequest());
     axios
       .get(
-        `${AppConfig.serverDomain}notification_core/v4/events?channel=whatsapp&size=${currentPageSize}&start=${templatesSize}`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
+        `${AppConfig.serverDomain}/events?channel=whatsapp&size=${currentPageSize}&start=${templatesSize}`
       )
       .then((response: any) => {
         const data = response?.data?.data?.whatsapp;

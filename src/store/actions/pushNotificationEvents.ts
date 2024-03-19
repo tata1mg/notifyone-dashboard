@@ -140,14 +140,7 @@ export const fetchPushNotificationEventDetails = (
 ) => {
   return (dispatch: EmailDispatchType) => {
     axios
-      .get(
-        `${AppConfig.serverDomain}notification_core/v4/events?channel=${event_type}`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      )
+      .get(`${AppConfig.serverDomain}/events?channel=${event_type}`)
       .then((response: any) => {
         const data = response?.data?.data?.push;
         dispatch(fetchPushNotificationTemplatesSuccess(data));
@@ -181,12 +174,7 @@ export const fetchPushNotificationEvents = (
     dispatch(fetchPushNotificationEventsRequest());
     axios
       .get(
-        `${AppConfig.serverDomain}notification_core/v4/events?channel=push&size=${currentPageSize}&start=${templatesSize}`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
+        `${AppConfig.serverDomain}/events?channel=push&size=${currentPageSize}&start=${templatesSize}`
       )
       .then((response: any) => {
         const data = response?.data?.data?.push;
@@ -221,7 +209,7 @@ export const updatePushNotificationEvent = (
 
     axios
       .put(
-        `${AppConfig.serverDomain}notification_core/v4/push/template`,
+        `${AppConfig.serverDomain}/push/template`,
         {
           app_name: eventDetails.app_name,
           body: eventDetails.event_text,

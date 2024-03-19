@@ -24,29 +24,29 @@ export function notificationProxy() {
        * Modify Proxy Req Options
        */
       const proxyReq = proxyReqOpts;
-      const authorization = srcReq.get('authorization');
-      if (
-        authorization &&
-        authorization.toLowerCase().startsWith(BEARER_TOKEN)
-      ) {
-        const jwtToken = authorization.substring(BEARER_TOKEN.length);
-        try {
-          const decodedToken = jwt.verify(
-            jwtToken,
-            config.jwt_secret
-          ) as jwtTokenPayload;
-          logger.info(
-            `user is trying to proxy ${SERVICE_IDENTIFIER.NOTIFICATION_CORE}`
-          );
-          // proxyReq.headers = proxyReq.headers ?? {};
-          // proxyReq.headers.Authorization = decodedToken.auth_token;
-        } catch (error) {
-          logger.error(
-            `${JWT_DECODE_AT_PROXY} ${SERVICE_IDENTIFIER.NOTIFICATION_CORE}`
-          );
-          //   console.error("JSON Timeout Or Decode Error");
-        }
-      }
+      // const authorization = srcReq.get('authorization');
+      // if (
+      //   authorization &&
+      //   authorization.toLowerCase().startsWith(BEARER_TOKEN)
+      // ) {
+      //   const jwtToken = authorization.substring(BEARER_TOKEN.length);
+      //   try {
+      //     const decodedToken = jwt.verify(
+      //       jwtToken,
+      //       config.jwt_secret
+      //     ) as jwtTokenPayload;
+      //     logger.info(
+      //       `user is trying to proxy ${SERVICE_IDENTIFIER.NOTIFICATION_CORE}`
+      //     );
+      //     // proxyReq.headers = proxyReq.headers ?? {};
+      //     // proxyReq.headers.Authorization = decodedToken.auth_token;
+      //   } catch (error) {
+      //     logger.error(
+      //       `${JWT_DECODE_AT_PROXY} ${SERVICE_IDENTIFIER.NOTIFICATION_CORE}`
+      //     );
+      //     //   console.error("JSON Timeout Or Decode Error");
+      //   }
+      // }
       return proxyReq;
     },
     userResDecorator(proxyRes, proxyResData, userReq, userRes) {
