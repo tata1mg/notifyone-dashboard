@@ -145,9 +145,6 @@ const CommunicationList: React.FC = () => {
   /*
     Redux Selectors for fetching data
   */
-  const accessToken = useSelector(
-    (state: RootState) => state?.user?.tokens?.accessToken
-  );
 
   const userRoles = useSelector((state: RootState) => state.user.roles);
 
@@ -229,58 +226,40 @@ const CommunicationList: React.FC = () => {
     setResetTypeFlag(true);
     if (type == COMMUNICATION_TYPE.SMS) {
       navigate('/templates/sms');
-      dispatch(fetchSmsEvents(accessToken, PageSize, 0));
+      dispatch(fetchSmsEvents(PageSize, 0));
     }
     if (type == COMMUNICATION_TYPE.Email) {
       navigate('/templates/email');
-      dispatch(fetchallEmailEvents(accessToken, PageSize, 0));
+      dispatch(fetchallEmailEvents(PageSize, 0));
     }
     if (type == COMMUNICATION_TYPE.Transactional_Push_notification) {
       navigate('/templates/transaction');
-      dispatch(fetchPushNotificationEvents(accessToken, PageSize, 0));
+      dispatch(fetchPushNotificationEvents(PageSize, 0));
     }
     if (type == COMMUNICATION_TYPE.Whatsapp) {
       navigate('/templates/whatsapp');
-      dispatch(fetchWhatsAppEvents(accessToken, PageSize, 0));
+      dispatch(fetchWhatsAppEvents(PageSize, 0));
     }
   }, [type]);
 
   useEffect(() => {
     if (resetTypeFlag === false) {
       if (type === COMMUNICATION_TYPE.SMS) {
-        dispatch(
-          fetchSmsEvents(accessToken, PageSize, currentPage * currentPageSize)
-        );
+        dispatch(fetchSmsEvents(PageSize, currentPage * currentPageSize));
       }
 
       if (type === COMMUNICATION_TYPE.Email) {
-        dispatch(
-          fetchallEmailEvents(
-            accessToken,
-            PageSize,
-            currentPage * currentPageSize
-          )
-        );
+        dispatch(fetchallEmailEvents(PageSize, currentPage * currentPageSize));
       }
 
       if (type === COMMUNICATION_TYPE.Transactional_Push_notification) {
         dispatch(
-          fetchPushNotificationEvents(
-            accessToken,
-            PageSize,
-            currentPage * currentPageSize
-          )
+          fetchPushNotificationEvents(PageSize, currentPage * currentPageSize)
         );
       }
 
       if (type === COMMUNICATION_TYPE.Whatsapp) {
-        dispatch(
-          fetchWhatsAppEvents(
-            accessToken,
-            PageSize,
-            currentPage * currentPageSize
-          )
-        );
+        dispatch(fetchWhatsAppEvents(PageSize, currentPage * currentPageSize));
       }
     }
   }, [currentPage, currentPageSize]);

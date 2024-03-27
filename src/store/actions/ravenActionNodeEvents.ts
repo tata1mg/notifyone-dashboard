@@ -103,12 +103,10 @@ export const changeRavenNodeActionFailure = (error: any) => {
 /**
  * Method to fetch raven action events from Node API
  * (Currently fetches in chunks of 200 (fetched all))
- * @param  {string} accessToken AccessToken for user
  * @param  {number} currentPageSize Current page size of existing nodes fetched
  * @param  {number} pageStart size to be started with
  */
 export const fetchRavenNodeActions = (
-  accessToken: string,
   currentPageSize: number,
   pageStart: number
 ) => {
@@ -116,12 +114,7 @@ export const fetchRavenNodeActions = (
     dispatch(fetchRavenNodeActionEventsRequest());
     return axios
       .get(
-        `${AppConfig.serverDomain}${AppConfig.ravenAppEndpoint}/nodes/actions?app_name=PHARMACY&size=${currentPageSize}&start=${pageStart}`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
+        `${AppConfig.serverDomain}${AppConfig.ravenAppEndpoint}/nodes/actions?app_name=PHARMACY&size=${currentPageSize}&start=${pageStart}`
       )
       .then((response: any) => {
         const nodes = response?.data?.result;
@@ -140,21 +133,15 @@ export const fetchRavenNodeActions = (
 
 /**
  * Method to send create new node action event from Node API
- * @param  {string} accessToken AccessToken for user
  * @param  {object} payload JSON payload
  */
-export const addNewNodeAction = (accessToken: string, payload: object) => {
+export const addNewNodeAction = (payload: object) => {
   return (dispatch: RavenRootNodeDispatchType) => {
     dispatch(addRavenNodeActionRequest());
     return axios
       .post(
         `${AppConfig.serverDomain}${AppConfig.ravenAppEndpoint}/node/action`,
-        payload,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
+        payload
       )
       .then((response: any) => {
         toast.success('Node Action Updated!');
@@ -171,21 +158,15 @@ export const addNewNodeAction = (accessToken: string, payload: object) => {
 
 /**
  * Method to update node action event from Node API
- * @param  {string} accessToken AccessToken for user
  * @param  {object} payload JSON payload
  */
-export const updateNewNodeAction = (accessToken: string, payload: object) => {
+export const updateNewNodeAction = (payload: object) => {
   return (dispatch: RavenRootNodeDispatchType) => {
     dispatch(changeRavenNodeActionRequest());
     return axios
       .put(
         `${AppConfig.serverDomain}${AppConfig.ravenAppEndpoint}/node/action`,
-        payload,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
+        payload
       )
       .then((response: any) => {
         toast.success('Node Action Updated!');

@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'src/store';
 import { getWhatsAppEvents } from 'src/store/selectors/whatsAppEvents';
 import { fetchCurrentEmailEvent } from 'src/store/actions/emailEvents';
-import { getAccessToken } from 'src/store/selectors/accessToken';
 import { Spinner } from '../Spinner';
 import { fetchCurrentSmsEvent } from 'src/store/actions/smsEvents';
 import { fetchCurrentPushEvent } from 'src/store/actions/pushNotificationEvents';
@@ -29,7 +28,6 @@ const Communication: React.FC = () => {
   const whatsAppEvents = useSelector((state: RootState) =>
     getWhatsAppEvents(state)
   );
-  const accessToken = useSelector((state: RootState) => getAccessToken(state));
 
   const currentEventLoading = useSelector(
     (state: RootState) => state.currentEvent.loading
@@ -48,13 +46,13 @@ const Communication: React.FC = () => {
   useEffect(() => {
     if (!currentEvent) {
       if (location.pathname.startsWith('/template/email/') && id) {
-        dispatch(fetchCurrentEmailEvent(accessToken, parseInt(id)));
+        dispatch(fetchCurrentEmailEvent(parseInt(id)));
       } else if (location.pathname.startsWith('/template/sms/') && id) {
-        dispatch(fetchCurrentSmsEvent(accessToken, parseInt(id)));
+        dispatch(fetchCurrentSmsEvent(parseInt(id)));
       } else if (location.pathname.startsWith('/template/transaction/') && id) {
-        dispatch(fetchCurrentPushEvent(accessToken, parseInt(id)));
+        dispatch(fetchCurrentPushEvent(parseInt(id)));
       } else if (location.pathname.startsWith('/template/whatsapp/') && id) {
-        dispatch(fetchCurrentWhatsappEvent(accessToken, parseInt(id)));
+        dispatch(fetchCurrentWhatsappEvent(parseInt(id)));
       }
     }
   }, [location.pathname]);

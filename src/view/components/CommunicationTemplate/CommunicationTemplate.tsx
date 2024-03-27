@@ -55,7 +55,6 @@ import {
   removeToCurrentEvent,
   updateToggleActionForSingleEvent,
 } from 'src/store/actions/currentEvents';
-import jwtDecode from 'jwt-decode';
 
 const { Option } = Select;
 
@@ -80,9 +79,6 @@ const CommunicationTemplate: React.FC<CommunicationTemplateProps> = ({
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
 
-  const accessToken = useSelector(
-    (state: RootState) => state?.user?.tokens?.accessToken
-  );
   const loadingEmailPreview = useSelector(
     (state: RootState) => state.emailEvents?.loadingPreview
   );
@@ -234,15 +230,7 @@ const CommunicationTemplate: React.FC<CommunicationTemplateProps> = ({
     let redirect = '';
     if (eventDetails.event_type === COMMUNICATION_TYPE.SMS) {
       redirect = '/sms';
-      dispatch(
-        updateSmsEvent(
-          eventDetails,
-          jwtDecode(accessToken),
-          payloads,
-          redirect,
-          navigate
-        )
-      );
+      dispatch(updateSmsEvent(eventDetails, payloads, redirect, navigate));
     }
 
     if (
@@ -251,40 +239,18 @@ const CommunicationTemplate: React.FC<CommunicationTemplateProps> = ({
     ) {
       redirect = '/transaction';
       dispatch(
-        updatePushNotificationEvent(
-          eventDetails,
-          jwtDecode(accessToken),
-          payloads,
-          redirect,
-          navigate
-        )
+        updatePushNotificationEvent(eventDetails, payloads, redirect, navigate)
       );
     }
 
     if (eventDetails.event_type === COMMUNICATION_TYPE.Email) {
       redirect = '/email';
-      dispatch(
-        updateEmailEvent(
-          eventDetails,
-          jwtDecode(accessToken),
-          payloads,
-          redirect,
-          navigate
-        )
-      );
+      dispatch(updateEmailEvent(eventDetails, payloads, redirect, navigate));
     }
 
     if (eventDetails.event_type === COMMUNICATION_TYPE.Whatsapp) {
       redirect = '/whatsapp';
-      dispatch(
-        updateWhatsAppEvent(
-          eventDetails,
-          jwtDecode(accessToken),
-          payloads,
-          redirect,
-          navigate
-        )
-      );
+      dispatch(updateWhatsAppEvent(eventDetails, payloads, redirect, navigate));
     }
   };
 
@@ -361,24 +327,16 @@ const CommunicationTemplate: React.FC<CommunicationTemplateProps> = ({
     }
 
     if (eventDetails.event_type === COMMUNICATION_TYPE.Email) {
-      dispatch(
-        previewEmailEvent(eventDetails, jwtDecode(accessToken), payloads)
-      );
+      dispatch(previewEmailEvent(eventDetails, payloads));
     }
     if (eventDetails.event_type === COMMUNICATION_TYPE.SMS) {
-      dispatch(previewSmsEvent(eventDetails, jwtDecode(accessToken), payloads));
+      dispatch(previewSmsEvent(eventDetails, payloads));
     }
     if (
       eventDetails.event_type ===
       COMMUNICATION_TYPE.Transactional_Push_notification
     ) {
-      dispatch(
-        previewPushNotificationEvent(
-          eventDetails,
-          jwtDecode(accessToken),
-          payloads
-        )
-      );
+      dispatch(previewPushNotificationEvent(eventDetails, payloads));
     }
 
     setShouldShowPreview(true);
@@ -410,7 +368,7 @@ const CommunicationTemplate: React.FC<CommunicationTemplateProps> = ({
   };
 
   const onInclude = (option: any) => {
-    return dispatch(fetchSingleEmailEvent(accessToken, option));
+    return dispatch(fetchSingleEmailEvent(option));
   };
 
   const closeModal = () => {
@@ -419,7 +377,7 @@ const CommunicationTemplate: React.FC<CommunicationTemplateProps> = ({
   };
 
   const onPreviewEmailTemplate = () => {
-    dispatch(previewEmailTemplate(selectIncludedTemplate, accessToken));
+    dispatch(previewEmailTemplate(selectIncludedTemplate));
   };
 
   function printPdf() {
@@ -459,7 +417,7 @@ const CommunicationTemplate: React.FC<CommunicationTemplateProps> = ({
       event_name: eventDetails.event_name,
       type: t,
     };
-    dispatch(updateToggleActionForSingleEvent(accessToken, payload));
+    dispatch(updateToggleActionForSingleEvent(payload));
   };
 
   return (

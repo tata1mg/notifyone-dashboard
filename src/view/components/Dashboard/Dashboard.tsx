@@ -11,7 +11,7 @@ const Dashboard: React.FC = () => {
   const dispatch = useDispatch();
   const location: any = useLocation();
   const onClickMenu = ({ key }: any) => {
-    key === 'logout' && dispatch(logoutUser());
+    console.log(key);
   };
 
   const getSelectedKey = () => {

@@ -22,7 +22,6 @@ import {
   getRavenMetaInfo,
   getTicketOption,
 } from 'src/store/selectors/createAction';
-import { getAccessToken } from 'src/store/selectors/accessToken';
 
 const CreateAction: React.FC = () => {
   const dispatch = useDispatch();
@@ -38,7 +37,6 @@ const CreateAction: React.FC = () => {
   const ravenMetaInfo = useSelector((state: RootState) =>
     getRavenMetaInfo(state)
   );
-  const accessToken = useSelector((state: RootState) => getAccessToken(state));
   const createSuccess = useSelector((state: RootState) =>
     getCreateSuccess(state)
   );
@@ -49,7 +47,7 @@ const CreateAction: React.FC = () => {
 
   useEffect(() => {
     if (createSuccess === true) {
-      dispatch(fetchRavenNodeActions(accessToken, 200, 0));
+      dispatch(fetchRavenNodeActions(200, 0));
       navigate('/communication/raven', { replace: true });
     }
   }, [createSuccess]);
@@ -62,8 +60,8 @@ const CreateAction: React.FC = () => {
  */
 
   useEffect(() => {
-    dispatch(fetchRavenMetaData(accessToken));
-    dispatch(fetchRavenTickets(accessToken));
+    dispatch(fetchRavenMetaData());
+    dispatch(fetchRavenTickets());
   }, []);
 
   const [isPreview, setIsPreview] = useState(false);
@@ -122,7 +120,7 @@ const CreateAction: React.FC = () => {
     };
     const [error, data] = validateData(payload);
     if (error === false && data !== null) {
-      dispatch(addNewNodeAction(accessToken, data));
+      dispatch(addNewNodeAction(data));
     }
   };
 

@@ -72,21 +72,13 @@ export const toggleEventFailure = (error: any) => {
 
 /**
  * Method to update a toggle action for email event
- * @param  {string} accessToken User AccessToken
  * @param  {any} payload
  */
-export const updateToggleActionForSingleEvent = (
-  accessToken: string,
-  payload: any
-) => {
+export const updateToggleActionForSingleEvent = (payload: any) => {
   return (dispatch: CurrentDispatchType) => {
     dispatch(toggleEventRequest());
     axios
-      .put(`${AppConfig.serverDomain}wallet_api/event/toggle`, payload, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
+      .put(`${AppConfig.serverDomain}wallet_api/event/toggle`, payload)
       .then((response: any) => {
         if (response?.data?.success === true) {
           dispatch(toggleEventSuccess(payload));

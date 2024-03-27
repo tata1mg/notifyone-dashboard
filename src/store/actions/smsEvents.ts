@@ -133,13 +133,9 @@ export const updateSMSEventFailure = (error: any) => {
 
 /**
  * Method to fetch all event templates (IDs and Name Only)
- * @param  {string} accessToken
  * @param  {string} event_type: 'sms' Email Event Details
  */
-export const fetchSmsEventDetails = (
-  accessToken: string,
-  event_type: 'sms'
-) => {
+export const fetchSmsEventDetails = (event_type: 'sms') => {
   return (dispatch: EmailDispatchType) => {
     axios
       .get(`${AppConfig.serverDomain}/events?channel=${event_type}`)
@@ -162,12 +158,10 @@ export const fetchSmsEventDetails = (
 /**
  * Method to fetch SMS Events from Node API
  * (Currently fetches in chunks of 50)
- * @param  {string} accessToken AccessToken for user
  * @param  {number} currentPageSize Current page size of existing events fetched
  * @param  {number} templatesSize template size to be fetched
  */
 export const fetchSmsEvents = (
-  accessToken: string,
   currentPageSize: number,
   templatesSize: number
 ) => {
@@ -194,11 +188,9 @@ export const fetchSmsEvents = (
 /**
  * Method to update SMS event
  * @param  {SMSEventDispatchType} eventDetails Simple SMS details that needs to update
- * @param  {string} accessToken AccessToken for user
  */
 export const updateSmsEvent = (
   eventDetails: MSMSTemplate,
-  accessToken: { auth_token: string },
   data: any,
   redirect: string,
   navigate: any
@@ -206,23 +198,15 @@ export const updateSmsEvent = (
   return (dispatch: SMSEventDispatchType) => {
     dispatch(updateSMSEventRequest());
     axios
-      .put(
-        `${AppConfig.serverDomain}notification_core/v4/sms/template`,
-        {
-          id: eventDetails.id,
-          app_name: eventDetails.app_name,
-          event_name: eventDetails.event_name,
-          trigger_limit: eventDetails.triggers_limit,
-          content: eventDetails.event_text,
-          event_id: eventDetails.event_id,
-          data,
-        },
-        {
-          headers: {
-            Authorization: accessToken.auth_token,
-          },
-        }
-      )
+      .put(`${AppConfig.serverDomain}/sms/template`, {
+        id: eventDetails.id,
+        app_name: eventDetails.app_name,
+        event_name: eventDetails.event_name,
+        trigger_limit: eventDetails.triggers_limit,
+        content: eventDetails.event_text,
+        // event_id: eventDetails.event_id,
+        data,
+      })
       .then((response: any) => {
         toast.success('Sms Event Updated');
         const success = response.success;
@@ -241,21 +225,13 @@ export const updateSmsEvent = (
 
 /**
  * Method to fetch current email event
- * @param  {string} accessToken
  * @param  {number} id Email Id
  */
-export const fetchCurrentSmsEvent = (accessToken: string, id: number) => {
+export const fetchCurrentSmsEvent = (id: number) => {
   return (dispatch: SMSEventDispatchType) => {
     dispatch(switchCurrentEventLoading(true));
     axios
-      .get(
-        `${AppConfig.serverDomain}notification_core/v4/event/${id}?channel=sms`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      )
+      .get(`${AppConfig.serverDomain}/event/${id}?channel=sms`)
       .then((response: any) => {
         const data = response.data.data.sms;
         dispatch(
@@ -276,29 +252,16 @@ export const fetchCurrentSmsEvent = (accessToken: string, id: number) => {
 /**
  * Method invoked when previewing a singular email event
  * @param  {any} eventDetails Email Event Details
- * @param  {string} accessToken
  */
-export const previewSmsEvent = (
-  eventDetails: any,
-  accessToken: { auth_token: string },
-  data: any
-) => {
+export const previewSmsEvent = (eventDetails: any, data: any) => {
   return (dispatch: EmailDispatchType) => {
     dispatch(previewSmsEventsRequest());
     axios
-      .post(
-        `${AppConfig.serverDomain}notification_core/v4/sms/template/preview`,
-        {
-          content: eventDetails.event_text,
-          event_name: eventDetails.event_name,
-          data,
-        },
-        {
-          headers: {
-            Authorization: accessToken.auth_token,
-          },
-        }
-      )
+      .post(`${AppConfig.serverDomain}/sms/template/preview`, {
+        content: eventDetails.event_text,
+        event_name: eventDetails.event_name,
+        data,
+      })
       .then((response: any) => {
         const previews = response.data?.data;
         dispatch(previewSmsEventsSuccess(previews));

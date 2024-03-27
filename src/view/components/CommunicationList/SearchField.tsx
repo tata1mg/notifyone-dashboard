@@ -7,7 +7,6 @@ import { COMS_TEMPLATE_NAVIGATE } from 'src/common/constants';
 import { RootState } from 'src/store';
 import Fuse from 'fuse.js';
 import { fetchEmailEventDetails } from 'src/store/actions/emailEvents';
-import { getAccessToken } from 'src/store/selectors/accessToken';
 import { Button } from '../Button';
 import { fetchSmsEventDetails } from 'src/store/actions/smsEvents';
 import { fetchWhatsappEventDetails } from 'src/store/actions/whatsappEvents';
@@ -17,7 +16,6 @@ import { addToCurrentEvent } from 'src/store/actions/currentEvents';
 const SearchField = ({ type }: { type: string }) => {
   const dispatch = useDispatch();
   const [eventType, setEventType] = useState(type);
-  const accessToken = useSelector((state: RootState) => getAccessToken(state));
   const email_id_templates = useSelector(
     (state: RootState) => state.emailEvents.email_id_templates
   );
@@ -36,25 +34,25 @@ const SearchField = ({ type }: { type: string }) => {
       case 'email':
         setEventType('email');
         if (email_id_templates && email_id_templates.length < 1) {
-          dispatch(fetchEmailEventDetails(accessToken, type));
+          dispatch(fetchEmailEventDetails(type));
         }
         break;
       case 'sms':
         setEventType('sms');
         if (sms_id_templates && sms_id_templates.length < 1) {
-          dispatch(fetchSmsEventDetails(accessToken, type));
+          dispatch(fetchSmsEventDetails(type));
         }
         break;
       case 'whatsapp':
         setEventType('whatsapp');
         if (whatsapp_id_templates && whatsapp_id_templates.length < 1) {
-          dispatch(fetchWhatsappEventDetails(accessToken, type));
+          dispatch(fetchWhatsappEventDetails(type));
         }
         break;
       case 'transactional push notification':
         setEventType('transaction');
         if (push_id_notifications && push_id_notifications.length < 1) {
-          dispatch(fetchPushNotificationEventDetails(accessToken, 'push'));
+          dispatch(fetchPushNotificationEventDetails('push'));
         }
         break;
     }
