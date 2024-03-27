@@ -805,57 +805,53 @@ const CommunicationTemplate: React.FC<CommunicationTemplateProps> = ({
           </Row>
         )
       )}
-      {authPermissionHandler(
-        userRoles,
-        appNames.LARA,
-        rightConstants.UPDATE
-      ) && (
-        <Row className="pt-10" justify="space-around">
-          {showHTMLType && emailError === '' && emailPreview && (
-            <Col>
-              {
-                <Button
-                  className="min-w-[120px]"
-                  disabled={!shouldShowPreview}
-                  onClick={() => printPdf()}
-                  type={ButtonType.Primary}
-                >
-                  <FormattedMessage id="generate_pdf" />
-                </Button>
-              }
-            </Col>
-          )}
-          {
-            <Col>
+
+      <Row className="pt-10" justify="space-around">
+        {showHTMLType && emailError === '' && emailPreview && (
+          <Col>
+            {
               <Button
                 className="min-w-[120px]"
-                data-testid="save-event-details-button"
-                onClick={onSaveTemplate}
-                disabled={
-                  eventDetails.event_type === COMMUNICATION_TYPE.Whatsapp
-                    ? false
-                    : preview?.length
-                    ? false
-                    : true
-                }
+                disabled={!shouldShowPreview}
+                onClick={() => printPdf()}
                 type={ButtonType.Primary}
               >
-                <FormattedMessage id="save" />
+                <FormattedMessage id="generate_pdf" />
               </Button>
-            </Col>
-          }
+            }
+          </Col>
+        )}
+        {
           <Col>
             <Button
               className="min-w-[120px]"
-              data-testid="reset-event-details-button"
-              onClick={onClearTemplate}
-              type={ButtonType.Danger}
+              data-testid="save-event-details-button"
+              onClick={onSaveTemplate}
+              disabled={
+                eventDetails.event_type === COMMUNICATION_TYPE.Whatsapp
+                  ? false
+                  : preview?.length
+                  ? false
+                  : true
+              }
+              type={ButtonType.Primary}
             >
-              <FormattedMessage id="cancel" />
+              <FormattedMessage id="save" />
             </Button>
           </Col>
-        </Row>
-      )}
+        }
+        <Col>
+          <Button
+            className="min-w-[120px]"
+            data-testid="reset-event-details-button"
+            onClick={onClearTemplate}
+            type={ButtonType.Danger}
+          >
+            <FormattedMessage id="cancel" />
+          </Button>
+        </Col>
+      </Row>
+
       {selectIncludedTemplate && (
         <Modal
           title="Modal"

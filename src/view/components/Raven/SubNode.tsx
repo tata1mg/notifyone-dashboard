@@ -4,9 +4,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button, ButtonType } from '../Button';
-import authPermissionHandler from 'src/common/authPermission/authPermissions';
-import appNames from 'src/common/constants/appNames';
-import rightConstants from 'src/common/constants/rightConstants';
 import { RootState } from 'src/store';
 import { updateNewNodeAction } from 'src/store/actions/ravenActionNodeEvents';
 import { sendNodeLink } from 'src/store/actions/ravenNodeEvents';
@@ -197,77 +194,67 @@ const SubNode: React.FC<SubNodeProps> = ({
             </div>
           </>
         )}
-        {authPermissionHandler(
-          userRoles,
-          appNames?.HELP,
-          rightConstants?.UPDATE
-        ) && (
-          <div className="edit-node-btn">
-            {/* This is for Edit Action */}
-            {!nodeSubQuestion.sub_questions ? (
-              <Link
-                rel="noopener noreferrer"
-                replace={true}
-                to={`/communication/raven/edit/action/${nodeSubQuestion.id}`}
+
+        <div className="edit-node-btn">
+          {/* This is for Edit Action */}
+          {!nodeSubQuestion.sub_questions ? (
+            <Link
+              rel="noopener noreferrer"
+              replace={true}
+              to={`/communication/raven/edit/action/${nodeSubQuestion.id}`}
+            >
+              <Button
+                className="px-1"
+                onClick={() => {
+                  dispatch(assignRavenRootNodeDetails(nodeSubQuestion));
+                  dispatch(
+                    getLinkedNodeEvents(
+                      accessToken,
+                      nodeSubQuestion.node_action
+                    )
+                  );
+                }}
               >
-                <Button
-                  className="px-1"
-                  onClick={() => {
-                    dispatch(assignRavenRootNodeDetails(nodeSubQuestion));
-                    dispatch(
-                      getLinkedNodeEvents(
-                        accessToken,
-                        nodeSubQuestion.node_action
-                      )
-                    );
-                  }}
-                >
-                  <FormattedMessage id="edit_action" />
-                </Button>
-              </Link>
-            ) : (
-              // This is for Edit Node
-              <Link
-                rel="noopener noreferrer"
-                replace={true}
-                className="edit-btn"
-                to={`/communication/raven/edit/${nodeSubQuestion.id}`}
+                <FormattedMessage id="edit_action" />
+              </Button>
+            </Link>
+          ) : (
+            // This is for Edit Node
+            <Link
+              rel="noopener noreferrer"
+              replace={true}
+              className="edit-btn"
+              to={`/communication/raven/edit/${nodeSubQuestion.id}`}
+            >
+              <Button
+                className="px-1"
+                onClick={() => {
+                  dispatch(assignRavenRootNodeDetails(nodeSubQuestion));
+                }}
               >
-                <Button
-                  className="px-1"
-                  onClick={() => {
-                    dispatch(assignRavenRootNodeDetails(nodeSubQuestion));
-                  }}
-                >
-                  <span className="parent-edit-btn">
-                    <FormattedMessage id="edit" />
-                  </span>
-                  <span className="child-edit-btn">
-                    <FormattedMessage id="edit_node" />
-                  </span>
-                </Button>
-              </Link>
-            )}
-          </div>
-        )}
+                <span className="parent-edit-btn">
+                  <FormattedMessage id="edit" />
+                </span>
+                <span className="child-edit-btn">
+                  <FormattedMessage id="edit_node" />
+                </span>
+              </Button>
+            </Link>
+          )}
+        </div>
       </div>
     </div>
   );
 
   const RootNode = (subQuestionLength: number | null) => (
     <div className="node-link flex">
-      {authPermissionHandler(
-        userRoles,
-        appNames.HELP,
-        rightConstants.CREATE
-      ) && (
-        <Button
-          className="text-sm mr-1.5 link px-1.5"
-          onClick={(e) => onChangeAddNode(e)}
-        >
-          <FormattedMessage id="add_node" />
-        </Button>
-      )}
+      <Button
+        className="text-sm mr-1.5 link px-1.5"
+        onClick={(e) => onChangeAddNode(e)}
+      >
+        <FormattedMessage id="add_node" />
+      </Button>
+
       <Button
         className="text-sm link px-1.5"
         disabled={

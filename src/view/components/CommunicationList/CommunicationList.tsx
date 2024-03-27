@@ -336,11 +336,7 @@ const CommunicationList: React.FC = () => {
           default:
             break;
         }
-        return authPermissionHandler(
-          userRoles,
-          appNames.LARA,
-          rightConstants.UPDATE
-        ) ? (
+        return (
           <Link
             to={{
               pathname: `${COMS_TEMPLATE_NAVIGATE}/${type}/${record.event_id}`,
@@ -350,7 +346,7 @@ const CommunicationList: React.FC = () => {
           >
             <FormattedMessage id="edit" />
           </Link>
-        ) : null;
+        );
       },
     };
     let columnType;

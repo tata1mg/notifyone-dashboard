@@ -1,21 +1,9 @@
-import React, {
-  Dispatch,
-  SetStateAction,
-  Suspense,
-  lazy,
-  useEffect,
-} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { Dispatch, SetStateAction, Suspense, lazy } from 'react';
+import { useDispatch } from 'react-redux';
 import { Navigate, Routes, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Roles from '../common/roles_mapping/roles';
 import { Spinner } from '../view/components/Spinner';
-import { isAuthorizedCard } from '../common/hoc/authorize';
-import AppConfig from 'src/common/appConfig';
-import { Header } from 'src/view/components/Header';
 import { RootState } from 'src/store';
-import { fetchUserInfo } from '../platform/actions/auth';
-import { findDefaultRoute } from 'src/common/utils/defaultRoute';
 
 const Dashboard = lazy(() => import('src/view/components/Dashboard/Dashboard'));
 const CommunicationList = lazy(
@@ -24,13 +12,6 @@ const CommunicationList = lazy(
 const Communication = lazy(
   () => import('src/view/components/Communication/Communication')
 );
-const Raven = lazy(() => import('src/view/components/Raven/Raven'));
-const EditAction = lazy(() => import('src/view/components/Raven/EditAction'));
-const EditNode = lazy(() => import('src/view/components/Raven/EditNode'));
-const CreateAction = lazy(
-  () => import('src/view/components/Raven/CreateAction')
-);
-const CreateNode = lazy(() => import('src/view/components/Raven/CreateNode'));
 
 interface AppRouteProps {
   changeLocale: Dispatch<SetStateAction<string>>;
