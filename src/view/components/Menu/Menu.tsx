@@ -5,16 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FormattedMessage } from 'react-intl';
 
-import { isAuthorize } from 'src/common/hoc/authorize';
-import ROLES from 'src/common/roles_mapping/roles';
-interface MenuItemType {
-  name: string;
-  icon?: string;
-  link?: string;
-  role?: string;
-  items?: any[];
-  deprecated?: boolean;
-}
 interface MenuPropsType {
   backgroundTheme?: string;
   className?: string;
@@ -46,97 +36,82 @@ const Menu = (props: MenuPropsType) => {
 
   return (
     <AntdMenu data-testid="custom-menu" {...rest}>
-      {menuList.map(
-        ({
-          children,
-          link,
-          icon,
-          name,
-          key = '',
-          iconType,
-          role,
-          deprecated = false,
-        }: any) => {
-          const displayName = <FormattedMessage id={name} />;
-          let image: any;
+      {menuList.map(({ children, link, icon, name, iconType }: any) => {
+        const displayName = <FormattedMessage id={name} />;
+        let image: any;
 
-          if (icon && iconType == 'font-awesome') {
-            image = (
-              <FontAwesomeIcon className={textTheme} icon={icon as IconProp} />
-            );
-          } else if (icon) {
-            image = Icon({ type: icon, textTheme });
-          }
+        if (icon && iconType == 'font-awesome') {
+          image = (
+            <FontAwesomeIcon className={textTheme} icon={icon as IconProp} />
+          );
+        } else if (icon) {
+          image = Icon({ type: icon, textTheme });
+        }
 
-          if (children) {
-            return (
-              <AntdMenu.SubMenu
-                className={textTheme}
-                key={name}
-                icon={image}
-                title={displayName}
-              >
-                {children.map(({ link, icon, name, state }: any) => {
-                  const displayName = <FormattedMessage id={name} />;
-                  let image: any;
-
-                  if (icon) {
-                    image = Icon({ type: icon });
-                  }
-
-                  if (link) {
-                    return (
-                      <AntdMenu.Item
-                        className={backgroundTheme}
-                        key={name}
-                        icon={image}
-                      >
-                        <Link className={textTheme} to={link} state={state}>
-                          {displayName}
-                        </Link>
-                      </AntdMenu.Item>
-                    );
-                  }
-
-                  return (
-                    <AntdMenu.Item
-                      className={textTheme + ' ' + backgroundTheme}
-                      icon={image}
-                      key={name}
-                    >
-                      {displayName}
-                    </AntdMenu.Item>
-                  );
-                })}
-              </AntdMenu.SubMenu>
-            );
-          }
-
-          if (link) {
-            return (
-              <AntdMenu.Item
-                key={name}
-                icon={image}
-                className={backgroundTheme}
-              >
-                <Link className={textTheme} to={link}>
-                  {displayName}
-                </Link>
-              </AntdMenu.Item>
-            );
-          }
-
+        if (children) {
           return (
-            <AntdMenu.Item
-              className={textTheme + ' ' + backgroundTheme}
+            <AntdMenu.SubMenu
+              className={textTheme}
               key={name}
               icon={image}
+              title={displayName}
             >
-              {displayName}
+              {children.map(({ link, icon, name, state }: any) => {
+                const displayName = <FormattedMessage id={name} />;
+                let image: any;
+
+                if (icon) {
+                  image = Icon({ type: icon });
+                }
+
+                if (link) {
+                  return (
+                    <AntdMenu.Item
+                      className={backgroundTheme}
+                      key={name}
+                      icon={image}
+                    >
+                      <Link className={textTheme} to={link} state={state}>
+                        {displayName}
+                      </Link>
+                    </AntdMenu.Item>
+                  );
+                }
+
+                return (
+                  <AntdMenu.Item
+                    className={textTheme + ' ' + backgroundTheme}
+                    icon={image}
+                    key={name}
+                  >
+                    {displayName}
+                  </AntdMenu.Item>
+                );
+              })}
+            </AntdMenu.SubMenu>
+          );
+        }
+
+        if (link) {
+          return (
+            <AntdMenu.Item key={name} icon={image} className={backgroundTheme}>
+              <Link className={textTheme} to={link}>
+                {displayName}
+              </Link>
             </AntdMenu.Item>
           );
         }
-      )}
+
+        return (
+          <AntdMenu.Item
+            className={textTheme + ' ' + backgroundTheme}
+            key={name}
+            icon={image}
+          >
+            {displayName}
+          </AntdMenu.Item>
+        );
+      })}
     </AntdMenu>
   );
 };

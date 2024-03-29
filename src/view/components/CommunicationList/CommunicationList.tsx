@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Col, Row, Select } from 'antd';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
-import rightConstants from 'src/common/constants/rightConstants';
 import './communicationList.css';
 import { Spinner } from '../Spinner';
 import { Table } from '../Table';
@@ -22,13 +21,8 @@ import { getPushNotificationEvents } from 'src/store/selectors/pushNotificationE
 import { getWhatsAppEvents } from 'src/store/selectors/whatsAppEvents';
 import { isFetchingEvents } from 'src/store/selectors/isFetchingEvents';
 import { RootState } from 'src/store';
-import authPermissionHandler from 'src/common/authPermission/authPermissions';
-import appNames from 'src/common/constants/appNames';
 import { commonEventDetailType } from '../types';
-import {
-  addToCurrentEvent,
-  removeToCurrentEvent,
-} from 'src/store/actions/currentEvents';
+import { addToCurrentEvent } from 'src/store/actions/currentEvents';
 import SearchField from './SearchField';
 
 const { Option } = Select;
@@ -145,8 +139,6 @@ const CommunicationList: React.FC = () => {
   /*
     Redux Selectors for fetching data
   */
-
-  const userRoles = useSelector((state: RootState) => state.user.roles);
 
   const isLoading = useSelector((state: RootState) => isFetchingEvents(state));
   const emailEvents = useSelector((state: RootState) => getEmailEvents(state));

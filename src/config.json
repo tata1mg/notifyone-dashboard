@@ -28,40 +28,6 @@
     "whatsAppEventsUpdate": "wallet_api/whatsapp/template",
     "ravenAppEndpoint": "wallet_api/raven"
   },
-  "platform": {
-    "appUrl": "local.odinweb.1mg.com",
-    "emails": {
-      "1mg": "1mg.com",
-      "2mg": "2mg.in",
-      "gmail": "gmail.com"
-    },
-    "logoutRoute": "logout",
-    "userPassloginRoute": "login",
-    "loginRoute": "google-signin",
-    "passPhrase": "Yq3s6v9y$B&E)H@M",
-    "platformAppUrlPort": 4000,
-    "google_client_id": "636386266577-mksatrgqp8e9urtk67loc95uqub9ntpl.apps.googleusercontent.com",
-    "sentry": {
-      "dns": "https://6905b8f2131a4b27b2c04889442ab09b@o1111710.ingest.sentry.io/6140972"
-    },
-    "serverDomain": "http://127.0.0.1:3000/",
-    "userInfoRoute": "userinfo",
-    "usermanagementURL": "wallet_api/user"
-  },
-  "user": {
-    "appUrl": "",
-    "login": "",
-    "userAppUrlPort": "8002",
-    "sentry": {
-      "dns": ""
-    },
-    "loginRoute": "google-signin",
-    "passPhrase": "",
-    "serverDomain": "http://127.0.0.1:3000/",
-    "userRole": "user/admin/v6",
-    "userInfoRoute": "userinfo",
-    "usermanagementURL": "wallet_api/user"
-  },
   "server": {
     "env": "prod",
     "is_secure": false,

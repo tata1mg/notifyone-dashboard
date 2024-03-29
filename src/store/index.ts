@@ -1,7 +1,6 @@
 import { legacy_createStore as createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from '@redux-devtools/extension';
-import { checkTokenExpirationMiddleware } from '../platform/middleware/checkTokenExpiration';
 import reducers from './reducers';
 
 const middlewares = [thunk];

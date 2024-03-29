@@ -23,7 +23,6 @@ import {
   switchCurrentEventLoading,
 } from './currentEvents';
 import { COMMUNICATION_TYPE } from 'src/common/constants';
-import { useNavigate } from 'react-router-dom';
 
 /**
  * @public

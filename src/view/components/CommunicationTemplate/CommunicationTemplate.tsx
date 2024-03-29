@@ -20,11 +20,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, ButtonType } from '../Button';
 
-import {
-  COMMUNICATION_TYPE,
-  COMS_TEMPLATE_NAVIGATE,
-  MAX_INPUT_LIMIT,
-} from 'src/common/constants';
+import { COMMUNICATION_TYPE, MAX_INPUT_LIMIT } from 'src/common/constants';
 import { previewSmsEvent, updateSmsEvent } from 'src/store/actions/smsEvents';
 import {
   previewPushNotificationEvent,
@@ -48,9 +44,6 @@ import {
   previewHeaderClassNames,
 } from './constants';
 import { Spinner } from '../Spinner';
-import authPermissionHandler from 'src/common/authPermission/authPermissions';
-import rightConstants from 'src/common/constants/rightConstants';
-import appNames from 'src/common/constants/appNames';
 import {
   removeToCurrentEvent,
   updateToggleActionForSingleEvent,
@@ -111,7 +104,6 @@ const CommunicationTemplate: React.FC<CommunicationTemplateProps> = ({
   const selectIncludedTemplate = useSelector(
     (state: RootState) => state?.emailEvents?.included_templates[0]
   );
-  const userRoles = useSelector((state: RootState) => state.user.roles);
 
   const ref = React.createRef<HTMLDivElement>();
 

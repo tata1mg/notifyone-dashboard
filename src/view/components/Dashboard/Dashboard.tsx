@@ -1,14 +1,10 @@
 import React from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 
 import { Menu } from '../Menu';
-import { logoutUser } from 'src/platform/actions/auth';
-
 import MenuList from 'src/common/appMenu/menu.json';
 
 const Dashboard: React.FC = () => {
-  const dispatch = useDispatch();
   const location: any = useLocation();
   const onClickMenu = ({ key }: any) => {
     console.log(key);
