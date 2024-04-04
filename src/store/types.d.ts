@@ -96,7 +96,7 @@ Email Event Types
 
 type MEmailTemplate = {
   updated_by?: string;
-  event_id?: number;
+  event_id?: any;
   triggers_limit?: number;
   name?: string;
   description?: string;
