@@ -3,6 +3,7 @@ SMS Event Types
 */
 
 type MSMSTemplate = {
+  event_id: any;
   event_text?: string;
   actions?: number;
   event_name?: string;
@@ -31,6 +32,7 @@ Push Notification Event Types
 */
 
 type MPushEventTemplate = {
+  event_id: any;
   updated?: number;
   body?: string;
   actions?: number;
@@ -65,6 +67,7 @@ Whatsapp Event Types
 */
 
 type MWhatsappTemplate = {
+  event_id: any;
   event_name?: string;
   app_name?: string;
   triggers_limit?: number;

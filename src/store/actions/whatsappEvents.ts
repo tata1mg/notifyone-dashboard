@@ -169,7 +169,7 @@ export const updateWhatsAppEvent = (
         id: eventDetails.id,
         app_name: eventDetails.app_name,
         event_name: eventDetails.event_name,
-        // event_id: eventDetails.event_id,
+        event_id: eventDetails.event_id,
         name: eventDetails.event_text,
         trigger_limit: eventDetails.triggers_limit,
         data,
