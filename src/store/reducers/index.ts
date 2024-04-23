@@ -6,11 +6,13 @@ import smsEventsReducer from './smsEvents.reducer';
 import whatsAppEventsReducer from './whatsappEvents.reducer';
 import ravenRootEventsReducer from './ravenRootNodeEvents.reducer';
 import currentEventsReducer from './currentEvent.reducer';
+import newEventReducer from './newEvent.reducer';
 
 const rootReducer = combineReducers({
   emailEvents: emailEventsReducer,
   pushNotificationEvents: pushNotificationEventsReducer,
   smsEvents: smsEventsReducer,
+  newEvent: newEventReducer,
   whatsAppEvents: whatsAppEventsReducer,
   currentEvent: currentEventsReducer,
   ravenRootEventsReducer: ravenRootEventsReducer,

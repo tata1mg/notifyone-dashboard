@@ -2,7 +2,6 @@ import React, { Dispatch, SetStateAction, Suspense, lazy } from 'react';
 import { Navigate, Routes, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Spinner } from '../view/components/Spinner';
-import { RootState } from 'src/store';
 
 const Dashboard = lazy(() => import('src/view/components/Dashboard/Dashboard'));
 const CommunicationList = lazy(
@@ -10,6 +9,12 @@ const CommunicationList = lazy(
 );
 const Communication = lazy(
   () => import('src/view/components/Communication/Communication')
+);
+const NewEventCreation = lazy(
+  () => import('src/view/components/NewEventCreation/index')
+);
+const AppNameCreation = lazy(
+  () => import('src/view/components/AppNameCreation/index')
 );
 
 interface AppRouteProps {
@@ -39,21 +44,23 @@ const AppRoutes: React.FC<AppRouteProps> = () => {
 
           <Route path="*" element={<Navigate to="/templates" replace />} />
           <Route path="/" element={<Navigate to="/templates" replace />} />
+          <Route path="new/event" element={<NewEventCreation />} />
+          <Route path="new/app" element={<AppNameCreation />} />
         </Route>
       </Routes>
     </Suspense>
   );
 };
 
-const mapStateToProps = (state: RootState) => {
-  const accessTokenBoolCheck = !!state?.user?.tokens?.accessToken;
-  const accessToken = state?.user?.tokens?.accessToken;
+// const mapStateToProps = (state: RootState) => {
+//   const accessTokenBoolCheck = !!state?.user?.tokens?.accessToken;
+//   const accessToken = state?.user?.tokens?.accessToken;
 
-  return {
-    user_name: state?.user?.name,
-    // login_success: accessTokenBoolCheck && state?.user?.success,
-    accessToken: accessTokenBoolCheck && accessToken,
-  };
-};
+//   return {
+//     user_name: state?.user?.name,
+//     // login_success: accessTokenBoolCheck && state?.user?.success,
+//     accessToken: accessTokenBoolCheck && accessToken,
+//   };
+// };
 
-export default connect(mapStateToProps, null)(AppRoutes);
+export default connect(null)(AppRoutes);

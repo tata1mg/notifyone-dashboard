@@ -44,6 +44,25 @@
     "link": "/templates"
   },
   {
+    "name": "new",
+    "icon": "PlusOutlined",
+    "role": "COMMUNICATION_APP",
+    "children": [
+      {
+        "name": "event",
+        "icon": "FormOutlined",
+        "link": "new/event",
+        "role": "COMMUNICATION"
+      },
+      {
+        "name": "app",
+        "icon": "FormOutlined",
+        "link": "new/app",
+        "role": "COMMUNICATION"
+      }
+    ]
+  },
+  {
     "name": "logout",
     "icon": "LogoutOutlined",
     "link": "/logout"
