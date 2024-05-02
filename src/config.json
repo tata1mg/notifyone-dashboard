@@ -19,7 +19,7 @@
     "sentry": {
       "dns": ""
     },
-    "serverDomain": "http://localhost:9402",
+    "serverDomain": "http://52.66.130.251:9815",
     "smsEvents": "wallet_api/sms/templates",
     "smsEventsUpdate": "wallet_api/sms/template",
     "tata1mgLogo": "",
@@ -32,7 +32,7 @@
     "env": "prod",
     "is_secure": false,
     "port": 3000,
-    "base_notification_url": "http://localhost:9402",
+    "base_notification_url": "http://52.66.130.251:9815",
     "base_site_url": "0.0.0.0",
     "google_client_id": "636386266577-mksatrgqp8e9urtk67loc95uqub9ntpl.apps.googleusercontent.com",
     "jwt_secret": "WqGfoEqsK3wPBsqxY1RH9XlV15wk4n46"

@@ -114,13 +114,14 @@ export const fetchCreateEventFormStructure = () => {
 };
 /**
  * Method to create a new event using api call
- * @param {object} formData
+ *  *  * @param {object} formData
+
  */
 export const createNewEvent = (formData: object) => {
   return (dispatch: any) => {
     dispatch(createEventRequest());
     axios
-      .post(`http://52.66.130.251:9815/form-structure/create-app`, {
+      .post(`${AppConfig.serverDomain}/event/create`, {
         ...formData,
       })
       .then((response: any) => {
@@ -163,13 +164,14 @@ export const fetchAppNameFormStructure = () => {
 };
 /**
  * Method to create a new event using api call
- * @param {object} formData
+ *  * @param {object} formData
+
  */
 export const createAppName = (formData: object) => {
   return (dispatch: any) => {
     dispatch(createEventRequest());
     axios
-      .post(`http://52.66.130.251:9815/form-structure/create-app`, {
+      .post(`${AppConfig.serverDomain}/apps`, {
         ...formData,
       })
       .then((response: any) => {
