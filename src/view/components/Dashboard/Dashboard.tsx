@@ -24,6 +24,22 @@ const Dashboard: React.FC = () => {
         default:
           return 'search';
       }
+    } else if (location.pathname.startsWith('/communication/new')) {
+      const lastItem = location.pathname.substring(
+        location.pathname.lastIndexOf('/') + 1
+      );
+      let key;
+      switch (lastItem) {
+        case 'event':
+          key = 'event';
+          break;
+        case 'app':
+          key = 'app';
+          break;
+        default:
+          key = 'event';
+      }
+      return key;
     } else if (pathname.startsWith('/communication/raven')) {
       const lastItem = pathname.substring(pathname.lastIndexOf('/') + 1);
       switch (lastItem) {

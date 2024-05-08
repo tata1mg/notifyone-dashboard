@@ -72,6 +72,7 @@ export default {
     enter_variable_key: 'Enter variable key',
     enter_variable_name: 'Enter variable name',
     error: 'Error',
+    event: 'Event',
     event_name: 'Event name',
     event_text: 'Event text',
     event_text_or_content: 'Event text / content',

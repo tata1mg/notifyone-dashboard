@@ -27,6 +27,19 @@ type SMSEventAction = {
 
 type SMSEventDispatchType = (args: SMSEventAction) => SMSEventAction | any;
 
+// Create new event interfaces
+interface NewEventState {
+  loading: boolean;
+  error: string;
+  formStructure: any;
+  eventCreated: boolean;
+  appNameCreated: boolean;
+}
+type NewEventAction = {
+  type?: string;
+  payload?: any;
+};
+
 /*
 Push Notification Event Types
 */
