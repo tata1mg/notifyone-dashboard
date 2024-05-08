@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-import { COMMUNICATION_TYPE, EVENT_FETCH_LIMIT } from 'src/common/constants';
+import { COMMUNICATION_TYPE } from 'src/common/constants';
 import AppConfig from 'src/common/appConfig';
 
 import {

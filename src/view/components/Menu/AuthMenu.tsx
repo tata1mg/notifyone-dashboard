@@ -5,9 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FormattedMessage } from 'react-intl';
 
-import { isAuthorize, isAuthorizeMultiRoles } from 'src/common/hoc/authorize';
-import ROLES from 'src/common/roles_mapping/roles';
-
 interface MenuPropsType {
   backgroundTheme?: string;
   className?: string;
@@ -38,18 +35,8 @@ const Icon = ({ type, textTheme, ...rest }: any) => {
 const Menu = (props: MenuPropsType) => {
   //Use to check if child has valid role
   function checkChildHasValidRole(children: any, deprecated = false): boolean {
-    let isValid = false;
-    for (const value of children) {
-      if (value?.role && value?.role.length > 0) {
-        //Shallow copy of 1 level
-        const roleTobeChecked = value.role.slice();
-        if (isAuthorizeMultiRoles(roleTobeChecked, deprecated)) {
-          isValid = true;
-          break;
-          //return aValue;
-        }
-      }
-    }
+    let isValid = true;
+
     return isValid;
   }
 
@@ -69,10 +56,6 @@ const Menu = (props: MenuPropsType) => {
         }: any) => {
           const displayName = <FormattedMessage id={name} />;
           let image: any;
-          if (role && !isAuthorize(ROLES[role], deprecated)) {
-            if (role.length > 0 && !isAuthorizeMultiRoles(role, deprecated))
-              return null;
-          }
 
           if (icon && iconType == 'font-awesome') {
             image = (
@@ -103,14 +86,7 @@ const Menu = (props: MenuPropsType) => {
                     }: any) => {
                       const displayName = <FormattedMessage id={name} />;
                       let image: any;
-                      if (role.length > 0) {
-                        const roleTobeChecked = role.slice();
-                        if (
-                          !isAuthorizeMultiRoles(roleTobeChecked, deprecated)
-                        ) {
-                          return null;
-                        }
-                      }
+
                       if (icon) {
                         image = Icon({ type: icon });
                       }

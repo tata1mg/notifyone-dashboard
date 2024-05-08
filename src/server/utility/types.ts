@@ -34,7 +34,7 @@ export interface jwtTokenPayload {
     contact_number: number;
     email_verified: boolean;
   };
-  roles: IRoles;
+
 }
 
 // Bound to change in future with change in API. This interface is temporary, please

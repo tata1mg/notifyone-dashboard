@@ -10,9 +10,6 @@ const communicationKeys = {
   ...AppConfig.common,
   ...AppConfig.communication,
 };
-const platformKeys = {
-  ...AppConfig.platform,
-};
 
 const commonConfig = {
   output: {
@@ -69,10 +66,6 @@ const commonConfig = {
       'process.env.communication': filterConfig(
         communicationKeys,
         allowedConfigs.communication
-      ),
-      'process.env.platform': filterConfig(
-        platformKeys,
-        allowedConfigs.platform
       ),
     }),
   ],

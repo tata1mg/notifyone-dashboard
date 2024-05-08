@@ -209,7 +209,7 @@ export const updatePushNotificationEvent = (
         target: eventDetails.target,
         title: eventDetails.title,
         triggers_limit: eventDetails.triggers_limit,
-        // event_id: eventDetails.event_id,
+        event_id: eventDetails.event_id,
         data,
       })
       .then((response: any) => {

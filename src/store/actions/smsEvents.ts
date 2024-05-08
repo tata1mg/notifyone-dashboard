@@ -23,7 +23,6 @@ import {
   switchCurrentEventLoading,
 } from './currentEvents';
 import { COMMUNICATION_TYPE } from 'src/common/constants';
-import { useNavigate } from 'react-router-dom';
 
 /**
  * @public
@@ -204,7 +203,7 @@ export const updateSmsEvent = (
         event_name: eventDetails.event_name,
         trigger_limit: eventDetails.triggers_limit,
         content: eventDetails.event_text,
-        // event_id: eventDetails.event_id,
+        event_id: eventDetails.event_id,
         data,
       })
       .then((response: any) => {
