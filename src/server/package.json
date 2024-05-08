@@ -25,7 +25,7 @@
   "author": "Animesh Singh",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.26.0",
+    "axios": "^0.28.0",
     "common": "*",
     "cors": "^2.8.5",
     "express": "^4.17.3",
