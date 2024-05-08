@@ -100,23 +100,12 @@ export const updateWhatsAppEventsFailure = (error: any) => {
 
 /**
  * Method to fetch all event templates (IDs and Name Only)
- * @param  {string} accessToken
  * @param  {string} event_type: 'whatsapp' Email Event Details
  */
-export const fetchWhatsappEventDetails = (
-  accessToken: string,
-  event_type: 'whatsapp'
-) => {
+export const fetchWhatsappEventDetails = (event_type: 'whatsapp') => {
   return (dispatch: EmailDispatchType) => {
     axios
-      .get(
-        `${AppConfig.serverDomain}notification_core/v4/events?channel=${event_type}`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      )
+      .get(`${AppConfig.serverDomain}/events?channel=${event_type}`)
       .then((response: any) => {
         const data = response?.data?.data?.whatsapp;
         dispatch(fetchWhatsappTemplatesSuccess(data));
@@ -135,12 +124,10 @@ export const fetchWhatsappEventDetails = (
 
 /**
  * Method to fetch whatsapp events in chunks of 50
- * @param  {string} accessToken AccessToken for user
  * @param  {number} currentPageSize Current data fetched in page
  * @param  {number} templatesSize data fetching chunk size
  */
 export const fetchWhatsAppEvents = (
-  accessToken: string,
   currentPageSize: number,
   templatesSize: number
 ) => {
@@ -148,12 +135,7 @@ export const fetchWhatsAppEvents = (
     dispatch(fetchWhatsAppEventsRequest());
     axios
       .get(
-        `${AppConfig.serverDomain}notification_core/v4/events?channel=whatsapp&size=${currentPageSize}&start=${templatesSize}`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
+        `${AppConfig.serverDomain}/events?channel=whatsapp&size=${currentPageSize}&start=${templatesSize}`
       )
       .then((response: any) => {
         const data = response?.data?.data?.whatsapp;
@@ -173,11 +155,9 @@ export const fetchWhatsAppEvents = (
 /**
  * Method to update Whatsapp singular event
  * @param  {MWhatsappTemplate} eventDetails Single Template event details
- * @param  {string} accessToken AccessToken for user
  */
 export const updateWhatsAppEvent = (
   eventDetails: MWhatsappTemplate,
-  accessToken: { auth_token: string },
   data: any,
   redirect: string,
   navigate: any
@@ -185,29 +165,21 @@ export const updateWhatsAppEvent = (
   return (dispatch: WhatsappDispatchType) => {
     dispatch(updateWhatsAppEventsRequest());
     axios
-      .put(
-        `${AppConfig.serverDomain}notification_core/v4/whatsapp/template`,
-        {
-          id: eventDetails.id,
-          app_name: eventDetails.app_name,
-          event_name: eventDetails.event_name,
-          event_id: eventDetails.event_id,
-          name: eventDetails.event_text,
-          trigger_limit: eventDetails.triggers_limit,
-          data,
-        },
-        {
-          headers: {
-            Authorization: accessToken.auth_token,
-          },
-        }
-      )
+      .put(`${AppConfig.serverDomain}/whatsapp/template`, {
+        id: eventDetails.id,
+        app_name: eventDetails.app_name,
+        event_name: eventDetails.event_name,
+        event_id: eventDetails.event_id,
+        name: eventDetails.event_text,
+        trigger_limit: eventDetails.triggers_limit,
+        data,
+      })
       .then((response: any) => {
         toast.success('WhatsApp Event Updated');
         const success = response.success;
         dispatch(updateWhatsAppEventsSuccess(success));
         dispatch(removeToCurrentEvent());
-        navigate(`/communication/templates${redirect}`);
+        navigate(`/templates${redirect}`);
       })
       .catch((error: any) => {
         toast.error(
@@ -222,21 +194,13 @@ export const updateWhatsAppEvent = (
 
 /**
  * Method to fetch current email event
- * @param  {string} accessToken
  * @param  {number} id Email Id
  */
-export const fetchCurrentWhatsappEvent = (accessToken: string, id: number) => {
+export const fetchCurrentWhatsappEvent = (id: number) => {
   return (dispatch: SMSEventDispatchType) => {
     dispatch(switchCurrentEventLoading(true));
     axios
-      .get(
-        `${AppConfig.serverDomain}notification_core/v4/event/${id}?channel=whatsapp`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      )
+      .get(`${AppConfig.serverDomain}/event/${id}?channel=whatsapp`)
       .then((response: any) => {
         const data = response.data.data.whatsapp;
         dispatch(

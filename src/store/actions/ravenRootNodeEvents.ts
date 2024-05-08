@@ -489,17 +489,12 @@ export const createChildNodeEvent = (accessToken: string, payload: any) => {
 
 /**
  * Method to fetch raven ticket events from Node API
- * @param  {string} accessToken AccessToken for user
  */
-export const fetchRavenTickets = (accessToken: string) => {
+export const fetchRavenTickets = () => {
   return (dispatch: RavenRootNodeDispatchType) => {
     dispatch(fetchRavenTicketEventsRequest());
     return axios
-      .get(`${AppConfig.serverDomain}${AppConfig.ravenAppEndpoint}/ticket`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
+      .get(`${AppConfig.serverDomain}${AppConfig.ravenAppEndpoint}/ticket`)
       .then((response: any) => {
         const ticketArr = response?.data?.result;
         dispatch(fetchRavenTicketEventsSuccess(ticketArr));
@@ -515,19 +510,13 @@ export const fetchRavenTickets = (accessToken: string) => {
 
 /**
  * Method to fetch raven metadata from Node API
- * @param  {string} accessToken AccessToken for user
  */
-export const fetchRavenMetaData = (accessToken: string) => {
+export const fetchRavenMetaData = () => {
   return (dispatch: RavenRootNodeDispatchType) => {
     dispatch(fetchRavenMetaDataRequest());
     return axios
       .get(
-        `${AppConfig.serverDomain}${AppConfig.ravenAppEndpoint}/nodes/metadata`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
+        `${AppConfig.serverDomain}${AppConfig.ravenAppEndpoint}/nodes/metadata`
       )
       .then((response: any) => {
         const metaData = response?.data?.result;

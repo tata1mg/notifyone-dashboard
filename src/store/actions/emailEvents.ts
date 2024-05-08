@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-import { COMMUNICATION_TYPE, EVENT_FETCH_LIMIT } from 'src/common/constants';
+import { COMMUNICATION_TYPE } from 'src/common/constants';
 import AppConfig from 'src/common/appConfig';
 
 import {
@@ -216,21 +216,15 @@ export const updateEmailEventsFailure = (error: any) => {
 
 /**
  * Method to fetch a single email event
- * @param  {string} accessToken User AccessToken
  * @param  {any} option Event detail
  */
-export const fetchSingleEmailEvent = (accessToken: string, option: any) => {
+export const fetchSingleEmailEvent = (option: any) => {
   return (dispatch: EmailDispatchType) => {
     dispatch(fetchEmailEventRequest());
 
     axios
       .get(
-        `${AppConfig.serverDomain}${AppConfig.emailEventsUpdate}?id=${option}`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
+        `${AppConfig.serverDomain}${AppConfig.emailEventsUpdate}?id=${option}`
       )
       .then((response: any) => {
         const event = response?.data?.result?.templates;
@@ -256,12 +250,10 @@ export const clearEmailTemplate = () => {
 
 /**
  * Method to fetch all email events
- * @param  {string} accessToken
  * @param  {any} currentPageSize Current limit of events shown on a single page
  * @param  {any} templatesSize total template size
  */
 export const fetchallEmailEvents = (
-  accessToken: string,
   currentPageSize: any,
   templatesSize: any
 ) => {
@@ -270,12 +262,7 @@ export const fetchallEmailEvents = (
 
     axios
       .get(
-        `${AppConfig.serverDomain}notification_core/v4/events?channel=email&size=${currentPageSize}&start=${templatesSize}`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
+        `${AppConfig.serverDomain}/events?channel=email&size=${currentPageSize}&start=${templatesSize}`
       )
       .then((response: any) => {
         const data = response?.data?.data?.email;
@@ -295,33 +282,21 @@ export const fetchallEmailEvents = (
 /**
  * Method invoked when previewing "select include" templates
  * @param  {MEmailTemplate} template Email Template
- * @param  {string} accessToken
  */
-export const previewEmailTemplate = (
-  template: MEmailTemplate,
-  accessToken: string
-) => {
+export const previewEmailTemplate = (template: MEmailTemplate) => {
   return (dispatch: EmailDispatchType) => {
     dispatch(previewEmailTemplateRequest());
     axios
-      .put(
-        `${AppConfig.serverDomain}${AppConfig.previewEmailEvent}`,
-        {
-          content: template.content,
-          description: template.description,
-          event_id: template.event_id,
-          id: template.id,
-          includes: template.includes,
-          name: template.name,
-          subject: template.subject,
-          updated_by: template.updated_by,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      )
+      .put(`${AppConfig.serverDomain}${AppConfig.previewEmailEvent}`, {
+        content: template.content,
+        description: template.description,
+        event_id: template.event_id,
+        id: template.id,
+        includes: template.includes,
+        name: template.name,
+        subject: template.subject,
+        updated_by: template.updated_by,
+      })
       .then((response: any) => {
         const preview = response.data.result.previews;
         dispatch(previewEmailTemplateSuccess(preview));
@@ -336,30 +311,17 @@ export const previewEmailTemplate = (
 /**
  * Method invoked when previewing a singular email event
  * @param  {any} eventDetails Email Event Details
- * @param  {string} accessToken
  */
-export const previewEmailEvent = (
-  eventDetails: any,
-  accessToken: { auth_token: string },
-  data: any
-) => {
+export const previewEmailEvent = (eventDetails: any, data: any) => {
   return (dispatch: EmailDispatchType) => {
     dispatch(previewEmailEventsRequest());
     axios
-      .post(
-        `${AppConfig.serverDomain}notification_core/v4/email/template/preview`,
-        {
-          id: eventDetails.id,
-          subject: eventDetails.subject,
-          content: eventDetails.event_text,
-          data,
-        },
-        {
-          headers: {
-            Authorization: accessToken.auth_token,
-          },
-        }
-      )
+      .post(`${AppConfig.serverDomain}/email/template/preview`, {
+        id: eventDetails.id,
+        subject: eventDetails.subject,
+        content: eventDetails.event_text,
+        data,
+      })
       .then((response: any) => {
         const previews = response.data.data?.previews;
         dispatch(previewEmailEventsSuccess(previews));
@@ -376,11 +338,9 @@ export const previewEmailEvent = (
 /**
  * Method to update email event for a singular email
  * @param  {any} eventDetails Email Event Details
- * @param  {string} accessToken
  */
 export const updateEmailEvent = (
   eventDetails: any,
-  accessToken: { auth_token: string },
   data: any,
   redirect: string,
   navigate: any
@@ -388,53 +348,37 @@ export const updateEmailEvent = (
   return (dispatch: EmailDispatchType) => {
     dispatch(previewEmailEventsRequest());
     axios
-      .post(
-        `${AppConfig.serverDomain}notification_core/v4/email/template/preview`,
-        {
-          id: eventDetails.id,
-          subject: eventDetails.subject,
-          content: eventDetails.event_text,
-          data,
-        },
-        {
-          headers: {
-            Authorization: accessToken.auth_token,
-          },
-        }
-      )
+      .post(`${AppConfig.serverDomain}/email/template/preview`, {
+        id: eventDetails.id,
+        subject: eventDetails.subject,
+        content: eventDetails.event_text,
+        data,
+      })
       .then((response: any) => {
         const previews = response.data.data?.previews;
         dispatch(previewEmailEventsSuccess(previews));
       })
       .then(() => {
         dispatch(updateEmailEventsRequest());
-        return axios.put(
-          `${AppConfig.serverDomain}notification_core/v4/email/template`,
-          {
-            app_name: eventDetails.app_name,
-            content: eventDetails.event_text,
-            description: eventDetails.description,
-            event_id: eventDetails.event_id,
-            event_name: eventDetails.event_name,
-            id: eventDetails.id,
-            name: eventDetails.name,
-            subject: eventDetails.subject,
-            triggers_limit: eventDetails.triggers_limit,
-            data,
-          },
-          {
-            headers: {
-              Authorization: accessToken.auth_token,
-            },
-          }
-        );
+        return axios.put(`${AppConfig.serverDomain}/email/template`, {
+          app_name: eventDetails.app_name,
+          content: eventDetails.event_text,
+          description: eventDetails.description,
+          event_id: eventDetails.event_id,
+          event_name: eventDetails.event_name,
+          id: eventDetails.id,
+          name: eventDetails.name,
+          subject: eventDetails.subject,
+          triggers_limit: eventDetails.triggers_limit,
+          data,
+        });
       })
       .then((response: any) => {
         toast.success('Email Event Updated');
         const success = response.success;
         dispatch(updateEmailEventsSuccess(success));
         dispatch(removeToCurrentEvent());
-        navigate(`/communication/templates${redirect}`);
+        navigate(`/templates${redirect}`);
       })
       .catch((error: any) => {
         toast.error(
@@ -449,23 +393,12 @@ export const updateEmailEvent = (
 
 /**
  * Method to fetch all event templates (IDs and Name Only)
- * @param  {string} accessToken
  * @param  {string} event_type: 'email' Email Event Details
  */
-export const fetchEmailEventDetails = (
-  accessToken: string,
-  event_type: 'email'
-) => {
+export const fetchEmailEventDetails = (event_type: 'email') => {
   return (dispatch: EmailDispatchType) => {
     axios
-      .get(
-        `${AppConfig.serverDomain}notification_core/v4/events?channel=${event_type}`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      )
+      .get(`${AppConfig.serverDomain}/events?channel=${event_type}`)
       .then((response: any) => {
         const data = response?.data?.data?.email;
         dispatch(fetchEmailIdTemplatesSuccess(data));
@@ -484,21 +417,13 @@ export const fetchEmailEventDetails = (
 
 /**
  * Method to fetch current email event
- * @param  {string} accessToken
  * @param  {number} id Email Id
  */
-export const fetchCurrentEmailEvent = (accessToken: string, id: number) => {
+export const fetchCurrentEmailEvent = (id: number) => {
   return (dispatch: EmailDispatchType) => {
     dispatch(switchCurrentEventLoading(true));
     axios
-      .get(
-        `${AppConfig.serverDomain}notification_core/v4/event/${id}?channel=email`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      )
+      .get(`${AppConfig.serverDomain}/event/${id}?channel=email`)
       .then((response: any) => {
         const data = response.data.data.email;
         dispatch(

@@ -20,11 +20,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, ButtonType } from '../Button';
 
-import {
-  COMMUNICATION_TYPE,
-  COMS_TEMPLATE_NAVIGATE,
-  MAX_INPUT_LIMIT,
-} from 'src/common/constants';
+import { COMMUNICATION_TYPE, MAX_INPUT_LIMIT } from 'src/common/constants';
 import { previewSmsEvent, updateSmsEvent } from 'src/store/actions/smsEvents';
 import {
   previewPushNotificationEvent,
@@ -48,14 +44,10 @@ import {
   previewHeaderClassNames,
 } from './constants';
 import { Spinner } from '../Spinner';
-import authPermissionHandler from 'src/common/authPermission/authPermissions';
-import rightConstants from 'src/common/constants/rightConstants';
-import appNames from 'src/common/constants/appNames';
 import {
   removeToCurrentEvent,
   updateToggleActionForSingleEvent,
 } from 'src/store/actions/currentEvents';
-import jwtDecode from 'jwt-decode';
 
 const { Option } = Select;
 
@@ -80,9 +72,6 @@ const CommunicationTemplate: React.FC<CommunicationTemplateProps> = ({
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
 
-  const accessToken = useSelector(
-    (state: RootState) => state?.user?.tokens?.accessToken
-  );
   const loadingEmailPreview = useSelector(
     (state: RootState) => state.emailEvents?.loadingPreview
   );
@@ -115,7 +104,6 @@ const CommunicationTemplate: React.FC<CommunicationTemplateProps> = ({
   const selectIncludedTemplate = useSelector(
     (state: RootState) => state?.emailEvents?.included_templates[0]
   );
-  const userRoles = useSelector((state: RootState) => state.user.roles);
 
   const ref = React.createRef<HTMLDivElement>();
 
@@ -234,15 +222,7 @@ const CommunicationTemplate: React.FC<CommunicationTemplateProps> = ({
     let redirect = '';
     if (eventDetails.event_type === COMMUNICATION_TYPE.SMS) {
       redirect = '/sms';
-      dispatch(
-        updateSmsEvent(
-          eventDetails,
-          jwtDecode(accessToken),
-          payloads,
-          redirect,
-          navigate
-        )
-      );
+      dispatch(updateSmsEvent(eventDetails, payloads, redirect, navigate));
     }
 
     if (
@@ -251,40 +231,18 @@ const CommunicationTemplate: React.FC<CommunicationTemplateProps> = ({
     ) {
       redirect = '/transaction';
       dispatch(
-        updatePushNotificationEvent(
-          eventDetails,
-          jwtDecode(accessToken),
-          payloads,
-          redirect,
-          navigate
-        )
+        updatePushNotificationEvent(eventDetails, payloads, redirect, navigate)
       );
     }
 
     if (eventDetails.event_type === COMMUNICATION_TYPE.Email) {
       redirect = '/email';
-      dispatch(
-        updateEmailEvent(
-          eventDetails,
-          jwtDecode(accessToken),
-          payloads,
-          redirect,
-          navigate
-        )
-      );
+      dispatch(updateEmailEvent(eventDetails, payloads, redirect, navigate));
     }
 
     if (eventDetails.event_type === COMMUNICATION_TYPE.Whatsapp) {
       redirect = '/whatsapp';
-      dispatch(
-        updateWhatsAppEvent(
-          eventDetails,
-          jwtDecode(accessToken),
-          payloads,
-          redirect,
-          navigate
-        )
-      );
+      dispatch(updateWhatsAppEvent(eventDetails, payloads, redirect, navigate));
     }
   };
 
@@ -361,24 +319,16 @@ const CommunicationTemplate: React.FC<CommunicationTemplateProps> = ({
     }
 
     if (eventDetails.event_type === COMMUNICATION_TYPE.Email) {
-      dispatch(
-        previewEmailEvent(eventDetails, jwtDecode(accessToken), payloads)
-      );
+      dispatch(previewEmailEvent(eventDetails, payloads));
     }
     if (eventDetails.event_type === COMMUNICATION_TYPE.SMS) {
-      dispatch(previewSmsEvent(eventDetails, jwtDecode(accessToken), payloads));
+      dispatch(previewSmsEvent(eventDetails, payloads));
     }
     if (
       eventDetails.event_type ===
       COMMUNICATION_TYPE.Transactional_Push_notification
     ) {
-      dispatch(
-        previewPushNotificationEvent(
-          eventDetails,
-          jwtDecode(accessToken),
-          payloads
-        )
-      );
+      dispatch(previewPushNotificationEvent(eventDetails, payloads));
     }
 
     setShouldShowPreview(true);
@@ -406,11 +356,11 @@ const CommunicationTemplate: React.FC<CommunicationTemplateProps> = ({
     }
 
     dispatch(removeToCurrentEvent());
-    navigate(`/communication/templates${redirect}`);
+    navigate(`/templates${redirect}`);
   };
 
   const onInclude = (option: any) => {
-    return dispatch(fetchSingleEmailEvent(accessToken, option));
+    return dispatch(fetchSingleEmailEvent(option));
   };
 
   const closeModal = () => {
@@ -419,7 +369,7 @@ const CommunicationTemplate: React.FC<CommunicationTemplateProps> = ({
   };
 
   const onPreviewEmailTemplate = () => {
-    dispatch(previewEmailTemplate(selectIncludedTemplate, accessToken));
+    dispatch(previewEmailTemplate(selectIncludedTemplate));
   };
 
   function printPdf() {
@@ -459,7 +409,7 @@ const CommunicationTemplate: React.FC<CommunicationTemplateProps> = ({
       event_name: eventDetails.event_name,
       type: t,
     };
-    dispatch(updateToggleActionForSingleEvent(accessToken, payload));
+    dispatch(updateToggleActionForSingleEvent(payload));
   };
 
   return (
@@ -805,57 +755,53 @@ const CommunicationTemplate: React.FC<CommunicationTemplateProps> = ({
           </Row>
         )
       )}
-      {authPermissionHandler(
-        userRoles,
-        appNames.LARA,
-        rightConstants.UPDATE
-      ) && (
-        <Row className="pt-10" justify="space-around">
-          {showHTMLType && emailError === '' && emailPreview && (
-            <Col>
-              {
-                <Button
-                  className="min-w-[120px]"
-                  disabled={!shouldShowPreview}
-                  onClick={() => printPdf()}
-                  type={ButtonType.Primary}
-                >
-                  <FormattedMessage id="generate_pdf" />
-                </Button>
-              }
-            </Col>
-          )}
-          {
-            <Col>
+
+      <Row className="pt-10" justify="space-around">
+        {showHTMLType && emailError === '' && emailPreview && (
+          <Col>
+            {
               <Button
                 className="min-w-[120px]"
-                data-testid="save-event-details-button"
-                onClick={onSaveTemplate}
-                disabled={
-                  eventDetails.event_type === COMMUNICATION_TYPE.Whatsapp
-                    ? false
-                    : preview?.length
-                    ? false
-                    : true
-                }
+                disabled={!shouldShowPreview}
+                onClick={() => printPdf()}
                 type={ButtonType.Primary}
               >
-                <FormattedMessage id="save" />
+                <FormattedMessage id="generate_pdf" />
               </Button>
-            </Col>
-          }
+            }
+          </Col>
+        )}
+        {
           <Col>
             <Button
               className="min-w-[120px]"
-              data-testid="reset-event-details-button"
-              onClick={onClearTemplate}
-              type={ButtonType.Danger}
+              data-testid="save-event-details-button"
+              onClick={onSaveTemplate}
+              disabled={
+                eventDetails.event_type === COMMUNICATION_TYPE.Whatsapp
+                  ? false
+                  : preview?.length
+                  ? false
+                  : true
+              }
+              type={ButtonType.Primary}
             >
-              <FormattedMessage id="cancel" />
+              <FormattedMessage id="save" />
             </Button>
           </Col>
-        </Row>
-      )}
+        }
+        <Col>
+          <Button
+            className="min-w-[120px]"
+            data-testid="reset-event-details-button"
+            onClick={onClearTemplate}
+            type={ButtonType.Danger}
+          >
+            <FormattedMessage id="cancel" />
+          </Button>
+        </Col>
+      </Row>
+
       {selectIncludedTemplate && (
         <Modal
           title="Modal"

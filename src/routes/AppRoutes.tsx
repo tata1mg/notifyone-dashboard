@@ -1,21 +1,8 @@
-import React, {
-  Dispatch,
-  SetStateAction,
-  Suspense,
-  lazy,
-  useEffect,
-} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { Dispatch, SetStateAction, Suspense, lazy } from 'react';
 import { Navigate, Routes, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Roles from '../common/roles_mapping/roles';
 import { Spinner } from '../view/components/Spinner';
-import { isAuthorizedCard } from '../common/hoc/authorize';
-import AppConfig from 'src/common/appConfig';
-import { Header } from 'src/view/components/Header';
 import { RootState } from 'src/store';
-import { fetchUserInfo } from '../platform/actions/auth';
-import { findDefaultRoute } from 'src/common/utils/defaultRoute';
 
 const Dashboard = lazy(() => import('src/view/components/Dashboard/Dashboard'));
 const CommunicationList = lazy(
@@ -24,36 +11,16 @@ const CommunicationList = lazy(
 const Communication = lazy(
   () => import('src/view/components/Communication/Communication')
 );
-const Raven = lazy(() => import('src/view/components/Raven/Raven'));
-const EditAction = lazy(() => import('src/view/components/Raven/EditAction'));
-const EditNode = lazy(() => import('src/view/components/Raven/EditNode'));
-const CreateAction = lazy(
-  () => import('src/view/components/Raven/CreateAction')
-);
-const CreateNode = lazy(() => import('src/view/components/Raven/CreateNode'));
 
 interface AppRouteProps {
   changeLocale: Dispatch<SetStateAction<string>>;
   locale: string;
-  // login_success?: boolean;
   accessToken?: any;
 }
 
-const AppRoutes: React.FC<AppRouteProps> = ({
-  changeLocale,
-  locale,
-  accessToken,
-  // login_success,
-}) => {
-  const dispatch = useDispatch();
-  // const userRoles = useSelector((state: any) => state?.user?.roles);
-  // const email = useSelector((state: any) => state?.user?.user_info?.email_id);
-
-  // useEffect(() => {
-  //   dispatch(fetchUserInfo(accessToken));
-  // }, []);
-
+const AppRoutes: React.FC<AppRouteProps> = () => {
   return (
+    //rendering the routes
     <Suspense fallback={<Spinner loading />}>
       <Routes>
         <Route path="/" element={<Dashboard />}>
@@ -67,26 +34,12 @@ const AppRoutes: React.FC<AppRouteProps> = ({
           <Route path="template/transaction/:id" element={<Communication />} />
           <Route path="template/email/:id" element={<Communication />} />
           <Route path="template/whatsapp/:id" element={<Communication />} />
-          <Route path="raven" element={<Raven />} />
-          <Route path="raven/action/create" element={<CreateAction />} />
-          <Route path="raven/node/create" element={<CreateNode />} />
-          <Route path="raven/edit/:id" element={<EditNode />} />
-          <Route path="raven/edit/action/:id" element={<EditAction />} />
-          {/* {userRoles && (
-            <Route
-              path=""
-              element={<Navigate to={findDefaultRoute(userRoles)} replace />}
-            />
-          )} */}
+
+          <Route path="" element={<Navigate to="/templates" replace />} />
+
+          <Route path="*" element={<Navigate to="/templates" replace />} />
+          <Route path="/" element={<Navigate to="/templates" replace />} />
         </Route>
-        {/* <Route
-          path="*"
-          element={<Navigate to={findDefaultRoute(userRoles)} replace />}
-        />
-        <Route
-          path="/"
-          element={<Navigate to={findDefaultRoute(userRoles)} replace />}
-        /> */}
       </Routes>
     </Suspense>
   );

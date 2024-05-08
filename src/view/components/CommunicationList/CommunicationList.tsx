@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Col, Row, Select } from 'antd';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
-import rightConstants from 'src/common/constants/rightConstants';
 import './communicationList.css';
 import { Spinner } from '../Spinner';
 import { Table } from '../Table';
@@ -22,13 +21,8 @@ import { getPushNotificationEvents } from 'src/store/selectors/pushNotificationE
 import { getWhatsAppEvents } from 'src/store/selectors/whatsAppEvents';
 import { isFetchingEvents } from 'src/store/selectors/isFetchingEvents';
 import { RootState } from 'src/store';
-import authPermissionHandler from 'src/common/authPermission/authPermissions';
-import appNames from 'src/common/constants/appNames';
 import { commonEventDetailType } from '../types';
-import {
-  addToCurrentEvent,
-  removeToCurrentEvent,
-} from 'src/store/actions/currentEvents';
+import { addToCurrentEvent } from 'src/store/actions/currentEvents';
 import SearchField from './SearchField';
 
 const { Option } = Select;
@@ -145,11 +139,6 @@ const CommunicationList: React.FC = () => {
   /*
     Redux Selectors for fetching data
   */
-  const accessToken = useSelector(
-    (state: RootState) => state?.user?.tokens?.accessToken
-  );
-
-  const userRoles = useSelector((state: RootState) => state.user.roles);
 
   const isLoading = useSelector((state: RootState) => isFetchingEvents(state));
   const emailEvents = useSelector((state: RootState) => getEmailEvents(state));
@@ -228,59 +217,41 @@ const CommunicationList: React.FC = () => {
     setCurrentPage(0);
     setResetTypeFlag(true);
     if (type == COMMUNICATION_TYPE.SMS) {
-      navigate('/communication/templates/sms');
-      dispatch(fetchSmsEvents(accessToken, PageSize, 0));
+      navigate('/templates/sms');
+      dispatch(fetchSmsEvents(PageSize, 0));
     }
     if (type == COMMUNICATION_TYPE.Email) {
-      navigate('/communication/templates/email');
-      dispatch(fetchallEmailEvents(accessToken, PageSize, 0));
+      navigate('/templates/email');
+      dispatch(fetchallEmailEvents(PageSize, 0));
     }
     if (type == COMMUNICATION_TYPE.Transactional_Push_notification) {
-      navigate('/communication/templates/transaction');
-      dispatch(fetchPushNotificationEvents(accessToken, PageSize, 0));
+      navigate('/templates/transaction');
+      dispatch(fetchPushNotificationEvents(PageSize, 0));
     }
     if (type == COMMUNICATION_TYPE.Whatsapp) {
-      navigate('/communication/templates/whatsapp');
-      dispatch(fetchWhatsAppEvents(accessToken, PageSize, 0));
+      navigate('/templates/whatsapp');
+      dispatch(fetchWhatsAppEvents(PageSize, 0));
     }
   }, [type]);
 
   useEffect(() => {
     if (resetTypeFlag === false) {
       if (type === COMMUNICATION_TYPE.SMS) {
-        dispatch(
-          fetchSmsEvents(accessToken, PageSize, currentPage * currentPageSize)
-        );
+        dispatch(fetchSmsEvents(PageSize, currentPage * currentPageSize));
       }
 
       if (type === COMMUNICATION_TYPE.Email) {
-        dispatch(
-          fetchallEmailEvents(
-            accessToken,
-            PageSize,
-            currentPage * currentPageSize
-          )
-        );
+        dispatch(fetchallEmailEvents(PageSize, currentPage * currentPageSize));
       }
 
       if (type === COMMUNICATION_TYPE.Transactional_Push_notification) {
         dispatch(
-          fetchPushNotificationEvents(
-            accessToken,
-            PageSize,
-            currentPage * currentPageSize
-          )
+          fetchPushNotificationEvents(PageSize, currentPage * currentPageSize)
         );
       }
 
       if (type === COMMUNICATION_TYPE.Whatsapp) {
-        dispatch(
-          fetchWhatsAppEvents(
-            accessToken,
-            PageSize,
-            currentPage * currentPageSize
-          )
-        );
+        dispatch(fetchWhatsAppEvents(PageSize, currentPage * currentPageSize));
       }
     }
   }, [currentPage, currentPageSize]);
@@ -336,11 +307,7 @@ const CommunicationList: React.FC = () => {
           default:
             break;
         }
-        return authPermissionHandler(
-          userRoles,
-          appNames.LARA,
-          rightConstants.UPDATE
-        ) ? (
+        return (
           <Link
             to={{
               pathname: `${COMS_TEMPLATE_NAVIGATE}/${type}/${record.event_id}`,
@@ -350,7 +317,7 @@ const CommunicationList: React.FC = () => {
           >
             <FormattedMessage id="edit" />
           </Link>
-        ) : null;
+        );
       },
     };
     let columnType;
