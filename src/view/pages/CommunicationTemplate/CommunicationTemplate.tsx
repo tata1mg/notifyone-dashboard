@@ -18,7 +18,7 @@ import jsPDF from 'jspdf';
 import { useNavigate } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Button, ButtonType } from '../Button';
+import { Button, ButtonType } from '../../components/Button';
 
 import { COMMUNICATION_TYPE, MAX_INPUT_LIMIT } from 'src/common/constants';
 import { previewSmsEvent, updateSmsEvent } from 'src/store/actions/smsEvents';
@@ -36,14 +36,14 @@ import {
 } from 'src/store/actions/emailEvents';
 import { RootState } from 'src/store';
 import { regExp } from './utils';
-import { commonEventDetailType } from '../types';
+import { commonEventDetailType } from '../../components/types';
 import {
   detailHeaderType,
   payloadPreviewLabelType,
   previewClassNames,
   previewHeaderClassNames,
 } from './constants';
-import { Spinner } from '../Spinner';
+import { Spinner } from '../../components/Spinner';
 import {
   removeToCurrentEvent,
   updateToggleActionForSingleEvent,
@@ -413,7 +413,7 @@ const CommunicationTemplate: React.FC<CommunicationTemplateProps> = ({
   };
 
   return (
-    <div className="px-10 py-10">
+    <div className="px-10 py-10 content-wrapper">
       <Row gutter={[16, 10]}>
         <Col xs={12} sm={12} md={4}>
           <span className="required">

@@ -4,8 +4,8 @@ import { Col, Row, Select } from 'antd';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
 import './communicationList.css';
-import { Spinner } from '../Spinner';
-import { Table } from '../Table';
+import { Spinner } from '../../components/Spinner/index';
+import { Table } from '../../components/Table/index';
 
 import { fetchSmsEvents } from 'src/store/actions/smsEvents';
 import { fetchallEmailEvents } from 'src/store/actions/emailEvents';
@@ -21,7 +21,7 @@ import { getPushNotificationEvents } from 'src/store/selectors/pushNotificationE
 import { getWhatsAppEvents } from 'src/store/selectors/whatsAppEvents';
 import { isFetchingEvents } from 'src/store/selectors/isFetchingEvents';
 import { RootState } from 'src/store';
-import { commonEventDetailType } from '../types';
+import { commonEventDetailType } from '../../components/types';
 import { addToCurrentEvent } from 'src/store/actions/currentEvents';
 import SearchField from './SearchField';
 
@@ -351,7 +351,7 @@ const CommunicationList: React.FC = () => {
 
   return (
     <Fragment>
-      <div className="px-4 pt-4 communication-list-wrap">
+      <div className="px-4 pt-4 communication-list-wrap content-wrapper">
         <Row className="mb-4" align="middle" justify="center">
           <Col className="mr-2">
             <FormattedMessage id="type" />

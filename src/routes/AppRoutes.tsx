@@ -5,16 +5,16 @@ import { Spinner } from '../view/components/Spinner';
 
 const Dashboard = lazy(() => import('src/view/components/Dashboard/Dashboard'));
 const CommunicationList = lazy(
-  () => import('src/view/components/CommunicationList/CommunicationList')
+  () => import('src/view/pages/CommunicationList/CommunicationList')
 );
 const Communication = lazy(
-  () => import('src/view/components/Communication/Communication')
+  () => import('src/view/pages/Communication/Communication')
 );
 const NewEventCreation = lazy(
   () => import('src/view/components/NewEventCreation/index')
 );
 const AppNameCreation = lazy(
-  () => import('src/view/components/AppNameCreation/index')
+  () => import('src/view/pages/AppNameCreation/index')
 );
 
 interface AppRouteProps {

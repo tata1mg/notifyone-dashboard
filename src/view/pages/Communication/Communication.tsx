@@ -4,12 +4,12 @@ import { useLocation, useParams } from 'react-router-dom';
 
 import { COMMUNICATION_TYPE } from 'src/common/constants';
 
-import { CommunicationTemplate } from '../CommunicationTemplate';
-import { commonEventDetailType } from '../types';
+import CommunicationTemplate from '../CommunicationTemplate/CommunicationTemplate';
+import { commonEventDetailType } from '../../components/types';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'src/store';
 import { fetchCurrentEmailEvent } from 'src/store/actions/emailEvents';
-import { Spinner } from '../Spinner';
+import { Spinner } from '../../components/Spinner';
 import { fetchCurrentSmsEvent } from 'src/store/actions/smsEvents';
 import { fetchCurrentPushEvent } from 'src/store/actions/pushNotificationEvents';
 import { fetchCurrentWhatsappEvent } from 'src/store/actions/whatsappEvents';
@@ -112,7 +112,7 @@ const Communication: React.FC = () => {
   return (
     <Layout
       hasSider
-      className="max-h-[calc(100vh-50px-50px)] overflow-y-scroll"
+      className="max-h-[calc(100vh-50px-50px)] overflow-y-scroll content-wrapper"
     >
       {currentEventLoading ? (
         <Spinner

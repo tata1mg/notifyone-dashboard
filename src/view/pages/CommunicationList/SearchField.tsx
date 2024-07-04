@@ -7,7 +7,7 @@ import { COMS_TEMPLATE_NAVIGATE } from 'src/common/constants';
 import { RootState } from 'src/store';
 import Fuse from 'fuse.js';
 import { fetchEmailEventDetails } from 'src/store/actions/emailEvents';
-import { Button } from '../Button';
+import { Button } from '../../components/Button';
 import { fetchSmsEventDetails } from 'src/store/actions/smsEvents';
 import { fetchWhatsappEventDetails } from 'src/store/actions/whatsappEvents';
 import { fetchPushNotificationEventDetails } from 'src/store/actions/pushNotificationEvents';

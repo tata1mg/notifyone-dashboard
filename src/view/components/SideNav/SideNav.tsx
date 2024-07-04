@@ -16,7 +16,7 @@ import {
 } from '@ant-design/icons';
 
 import './sideNav.css';
-import onemgIcon from 'src/assets/image/logo.png';
+import { logo } from 'src/assets/image';
 import { Link, useLocation } from 'react-router-dom';
 import { SIDER_WIDTH } from 'src/common/constants';
 
@@ -118,7 +118,7 @@ const SideNav = ({ collapsed, setCollapsed }: SideNavProps) => {
   };
 
   const expandedMenuItem = () => {
-    let expandedMenu: string[] = [''];
+    let expandedMenu = [''];
     switch (currentPathname) {
       case '/templates/sms':
       case '/templates/whatsapp':
@@ -137,21 +137,12 @@ const SideNav = ({ collapsed, setCollapsed }: SideNavProps) => {
       default:
         break;
     }
-
     return expandedMenu;
   };
 
-  //   useEffect(() => {
-  //     setActiveMenu(expandedMenuItem());
-  //     if (
-  //       currentPathname === '/vendor-hub/polygon-manager/polygons/create' ||
-  //       currentPathname === '/vendor-hub/polygon-manager/polygons/edit'
-  //     ) {
-  //       setCollapsed(true);
-  //     } else {
-  //       setCollapsed(false);
-  //     }
-  //   }, [currentPathname]);
+  useEffect(() => {
+    setActiveMenu(expandedMenuItem());
+  }, [currentPathname]);
 
   useEffect(() => {
     if (collapsed) {
@@ -203,9 +194,9 @@ const SideNav = ({ collapsed, setCollapsed }: SideNavProps) => {
                 style={{
                   background: 'rgba(255, 255, 255, 0.3)',
                   width: '8rem',
-                  height: '4rem',
+                  height: '3rem',
                 }}
-                src={onemgIcon}
+                src={logo}
                 alt="1mg Icon"
               />
             </div>
