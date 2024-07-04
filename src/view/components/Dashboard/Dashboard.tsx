@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 
 import { Menu } from '../Menu';
 import MenuList from 'src/common/appMenu/menu.json';
+import { SideNav } from '../SideNav';
+import { Layout } from 'antd';
+import { HeaderUI } from '../HeaderUI';
+import './dashboard.css';
+
+const { Header, Content } = Layout;
 
 const Dashboard: React.FC = () => {
   const location: any = useLocation();
@@ -56,23 +62,21 @@ const Dashboard: React.FC = () => {
 
     return '';
   };
+
+  const [collapsed, setCollapsed] = useState(false);
   return (
-    <div>
-      <Menu
-        className="!bg-app-theme communication-top-menu"
-        data-testid="communication-top-menu"
-        menuList={MenuList}
-        mode="horizontal"
-        onClick={onClickMenu}
-        selectedKeys={[getSelectedKey()]}
-        textTheme={'!text-white hover:!text-app-theme'}
-        theme="dark"
-      />
-      <Outlet />
-    </div>
+    <Layout className="layout-container">
+      <SideNav collapsed={collapsed} setCollapsed={setCollapsed} />
+      <Layout className="site-layout">
+        <Header className="site-layout-background header-container">
+          <HeaderUI />
+        </Header>
+        <Content>
+          <Outlet />
+        </Content>
+      </Layout>
+    </Layout>
   );
 };
-
-export const DashboardComponent = Dashboard;
 
 export default Dashboard;

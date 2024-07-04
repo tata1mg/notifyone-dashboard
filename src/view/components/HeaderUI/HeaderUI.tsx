@@ -10,7 +10,7 @@ import LOCALES from 'src/common/i18n/locales';
 
 const { Option } = Select;
 
-const Header = ({ changeLocale, locale, name }: any) => {
+const HeaderUI = ({ changeLocale, locale, name }: any) => {
   const intl = useIntl();
   const username =
     name && name.lastIndexOf('@')
@@ -65,9 +65,9 @@ const Header = ({ changeLocale, locale, name }: any) => {
         </Col>
       </Row>
 
-      <Outlet />
+      {/* <Outlet /> */}
     </Fragment>
   );
 };
 
-export default Header;
+export default HeaderUI;

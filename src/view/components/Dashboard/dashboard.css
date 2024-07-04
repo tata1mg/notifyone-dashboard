@@ -1,0 +1,19 @@
+.layout-container {
+  min-height: 100vh !important;
+}
+
+.site-layout {
+  min-height: 100vh;
+}
+
+.header-container {
+  height: auto !important;
+  padding: 0 !important;
+  background: white !important;
+}
+
+.content-wrapper {
+  margin: 24px;
+  padding: 24px;
+  background: white;
+}
