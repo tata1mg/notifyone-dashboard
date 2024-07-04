@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Select } from 'antd';
 import { Col, Row } from 'antd';
-import { Link, Outlet } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 
 import { logo } from 'src/assets/image';

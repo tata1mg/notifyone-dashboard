@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Menu, Layout, Typography, Col, Row, Divider } from 'antd';
+import { Menu, Layout, Col, Row, Divider } from 'antd';
 import type { MenuProps } from 'antd';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  ContactsOutlined,
-  SlidersOutlined,
-  RadarChartOutlined,
-  SettingOutlined,
-  DashboardOutlined,
+  MessageOutlined,
+  FileTextOutlined,
+  WhatsAppOutlined,
+  NotificationOutlined,
+  Html5Outlined,
+  MailOutlined,
+  PlusOutlined,
+  FormOutlined,
   AppstoreOutlined,
-  PushpinOutlined,
-  ContainerOutlined,
 } from '@ant-design/icons';
 
 import './sideNav.css';
@@ -26,7 +27,6 @@ interface SideNavProps {
 }
 
 const { Sider } = Layout;
-const { Title } = Typography;
 
 const getItem = (
   key: React.Key,
@@ -45,66 +45,70 @@ const getItem = (
 };
 
 const menuItems = [
-  getItem(
-    'services_dashboard',
-    <Link to="/vendor-hub/vendor-services-dashboard">
-      Vendor Services Dashboard
-    </Link>,
-    <DashboardOutlined />
-  ),
+  getItem('text_only', 'Text Only', <FileTextOutlined />, [
+    getItem('sms', <Link to="/templates/sms">SMS</Link>, <MessageOutlined />),
+    getItem(
+      'whatsapp',
+      <Link to="/templates/whatsapp">Whatsapp</Link>,
+      <WhatsAppOutlined />
+    ),
+    getItem(
+      'transaction',
+      <Link to="/templates/transaction">Transactional Push Notification</Link>,
+      <NotificationOutlined />
+    ),
+  ]),
+  getItem('html_based', 'HTML Based', <Html5Outlined />, [
+    getItem(
+      'email',
+      <Link to="/templates/email">Email</Link>,
+      <MailOutlined />
+    ),
+  ]),
+  getItem('create', 'Create', <PlusOutlined />, [
+    getItem(
+      'event',
+      <Link to="/new/event">Event Creation</Link>,
+      <FormOutlined />
+    ),
+    getItem(
+      'app',
+      <Link to="/new/app">App Creation</Link>,
+      <AppstoreOutlined />
+    ),
+  ]),
 ];
 
 const SideNav = ({ collapsed, setCollapsed }: SideNavProps) => {
   const currentPathname = useLocation().pathname;
-  const [activeMenu, setActiveMenu] = useState(['vendor_manager']);
+  const [activeMenu, setActiveMenu] = useState(['sms']);
 
   const highlightMenuItem = () => {
     let highlightedMenu: string[] = [''];
 
     switch (currentPathname) {
-      case '/vendor-hub/vendor-manager/vendors':
-        highlightedMenu = ['all_vendors'];
+      case '/templates/sms':
+        highlightedMenu = ['sms'];
         break;
 
-      case '/vendor-hub/polygon-manager/polygons':
-        highlightedMenu = ['all_polygons'];
+      case '/templates/whatsapp':
+        highlightedMenu = ['whatsapp'];
         break;
 
-      case '/vendor-hub/bulk-update-manager/bulk-update':
-        highlightedMenu = ['bulk_update'];
+      case '/templates/transaction':
+        highlightedMenu = ['transaction'];
         break;
 
-      case '/vendor-hub/vendor-services-dashboard':
-        highlightedMenu = ['services_dashboard'];
+      case '/templates/email':
+        highlightedMenu = ['email'];
         break;
 
-      case '/vendor-hub/provent':
-        highlightedMenu = ['pro_vent'];
+      case '/new/event':
+        highlightedMenu = ['event'];
         break;
 
-      case '/vendor-hub/dashboards/sku-serviceability':
-        highlightedMenu = ['sku_serviceability'];
-        break;
-
-      case '/vendor-hub/dashboards/vendor-data-history/commission-history':
-        highlightedMenu = ['commission_history'];
-        break;
-
-      case '/vendor-hub/dashboards/allocation-history':
-        highlightedMenu = ['allocation_history'];
-        break;
-
-      case '/vendor-hub/capacity':
-      case '/vendor-hub/capacity/new':
-        highlightedMenu = ['capacity'];
-        break;
-
-      case '/vendor-hub/rules/availability-rules':
-        highlightedMenu = ['availability_rules'];
-        break;
-
-      case '/vendor-hub/rules/stockable-rules':
-        highlightedMenu = ['stockable_rules'];
+      case '/new/app':
+        highlightedMenu = ['app'];
         break;
 
       default:
@@ -116,32 +120,20 @@ const SideNav = ({ collapsed, setCollapsed }: SideNavProps) => {
   const expandedMenuItem = () => {
     let expandedMenu: string[] = [''];
     switch (currentPathname) {
-      case '/vendor-hub/vendor-manager/vendors':
-        expandedMenu = ['vendor_manager'];
+      case '/templates/sms':
+      case '/templates/whatsapp':
+      case '/templates/transaction':
+        expandedMenu = ['text_only'];
         break;
 
-      case '/vendor-hub/polygon-manager/polygons':
-        expandedMenu = ['polygon_manager'];
+      case '/templates/email':
+        expandedMenu = ['html_based'];
         break;
 
-      case '/vendor-hub/bulk-update-manager/bulk-update':
-        expandedMenu = ['bulk_update_manager'];
+      case '/new/event':
+      case '/new/app':
+        expandedMenu = ['create'];
         break;
-
-      case '/vendor-hub/dashboards/sku-serviceability':
-      case '/vendor-hub/dashboards/allocation-history':
-        expandedMenu = ['dashboards'];
-        break;
-
-      case '/vendor-hub/dashboards/vendor-data-history/commission-history':
-        expandedMenu = ['dashboards', 'vendor_data_history'];
-        break;
-
-      case '/vendor-hub/rules/availability-rules':
-      case '/vendor-hub/rules/stockable-rules':
-        expandedMenu = ['rules'];
-        break;
-
       default:
         break;
     }
@@ -149,17 +141,17 @@ const SideNav = ({ collapsed, setCollapsed }: SideNavProps) => {
     return expandedMenu;
   };
 
-  useEffect(() => {
-    setActiveMenu(expandedMenuItem());
-    if (
-      currentPathname === '/vendor-hub/polygon-manager/polygons/create' ||
-      currentPathname === '/vendor-hub/polygon-manager/polygons/edit'
-    ) {
-      setCollapsed(true);
-    } else {
-      setCollapsed(false);
-    }
-  }, [currentPathname]);
+  //   useEffect(() => {
+  //     setActiveMenu(expandedMenuItem());
+  //     if (
+  //       currentPathname === '/vendor-hub/polygon-manager/polygons/create' ||
+  //       currentPathname === '/vendor-hub/polygon-manager/polygons/edit'
+  //     ) {
+  //       setCollapsed(true);
+  //     } else {
+  //       setCollapsed(false);
+  //     }
+  //   }, [currentPathname]);
 
   useEffect(() => {
     if (collapsed) {
@@ -210,8 +202,8 @@ const SideNav = ({ collapsed, setCollapsed }: SideNavProps) => {
               <img
                 style={{
                   background: 'rgba(255, 255, 255, 0.3)',
-                  width: '128px',
-                  height: '48px',
+                  width: '8rem',
+                  height: '4rem',
                 }}
                 src={onemgIcon}
                 alt="1mg Icon"
@@ -221,7 +213,7 @@ const SideNav = ({ collapsed, setCollapsed }: SideNavProps) => {
         )}
       </Row>
 
-      <Divider style={{ margin: 0 }} />
+      <Divider style={{ margin: 8 }} />
 
       <Menu
         defaultSelectedKeys={highlightMenuItem()}
