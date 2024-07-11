@@ -29,9 +29,9 @@ WORKDIR /home/ubuntu/apps/$SERVICE_NAME
 COPY . .
 
 RUN npm i --legacy-peer-deps
-RUN cd src/server/
+RUN cd server/
 RUN npm i --legacy-peer-deps
-RUN cd ../../
+RUN cd ../
 
 # Start the FE service
 CMD ["npm", "run", "dev"]
