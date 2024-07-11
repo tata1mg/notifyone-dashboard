@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-relative-packages
-import commonConfig from '../../config.json';
+import commonConfig from '../../src/config.json';
 
 // eslint-disable-next-line import/no-mutable-exports
 let config: any;
