@@ -38,5 +38,5 @@ RUN cd ../
 CMD ["npm", "run", "dev"]
 
 # Start the server
-RUN cd src/server/
+RUN cd server/
 CMD ["npm", "start"]
