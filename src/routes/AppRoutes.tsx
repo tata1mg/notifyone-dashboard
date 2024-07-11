@@ -11,7 +11,7 @@ const Communication = lazy(
   () => import('src/view/pages/Communication/Communication')
 );
 const NewEventCreation = lazy(
-  () => import('src/view/components/NewEventCreation/index')
+  () => import('src/view/pages/NewEventCreation/index')
 );
 const AppNameCreation = lazy(
   () => import('src/view/pages/AppNameCreation/index')

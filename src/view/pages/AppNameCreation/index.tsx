@@ -7,7 +7,7 @@ import {
 } from 'src/store/actions/newEvent';
 import { RootState } from 'src/store';
 import { Spin } from 'antd';
-import '../../components/NewEventCreation/index.css';
+import '../NewEventCreation/index.css';
 const AppNameCreation = () => {
   const dispatch = useDispatch();
   const onSubmit = (formData: any) => {
