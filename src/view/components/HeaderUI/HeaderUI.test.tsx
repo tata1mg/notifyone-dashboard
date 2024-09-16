@@ -3,7 +3,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 
 import { withProvider } from 'src/common/renderWithProvider';
 
-import Header from './Header';
+import Header from './HeaderUI';
 
 describe('Header', () => {
   test('should display Header screen', async () => {
