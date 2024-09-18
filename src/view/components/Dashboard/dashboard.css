@@ -3,16 +3,19 @@
 }
 
 .site-layout {
+  height: 100vh;
   min-height: 100vh;
 }
 
 .header-container {
-  height: auto !important;
+  height: 80px !important;
   padding: 0 !important;
   background: white !important;
 }
 
 .content-wrapper {
+  height: calc(100% - 48px);
+  overflow-y: scroll;
   margin: 24px;
   padding: 24px;
   background: white;

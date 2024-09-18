@@ -1,7 +1,7 @@
 import React from 'react';
-import HashLoader from 'react-spinners/HashLoader';
 
 import './Spinner.css';
+import { Spin } from 'antd';
 
 interface SpinnerType {
   className?: string;
@@ -12,7 +12,7 @@ const Spinner = ({ className, loading }: SpinnerType) => {
   return (
     <div className={`container ${className}`}>
       <div className="center">
-        <HashLoader loading={loading} />
+        <Spin size="large" spinning={loading} />
       </div>
     </div>
   );

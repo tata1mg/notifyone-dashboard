@@ -16,6 +16,7 @@ const NewEventCreation = lazy(
 const AppNameCreation = lazy(
   () => import('src/view/pages/AppNameCreation/index')
 );
+const HomePage = lazy(() => import('src/view/pages/HomePage/HomePage'));
 
 interface AppRouteProps {
   changeLocale: Dispatch<SetStateAction<string>>;
@@ -29,6 +30,7 @@ const AppRoutes: React.FC<AppRouteProps> = () => {
     <Suspense fallback={<Spinner loading />}>
       <Routes>
         <Route path="/" element={<Dashboard />}>
+          <Route path="home" element={<HomePage />} />
           <Route path="templates" element={<CommunicationList />}>
             <Route path="sms" element={<CommunicationList />} />
             <Route path="whatsapp" element={<CommunicationList />} />
@@ -40,10 +42,10 @@ const AppRoutes: React.FC<AppRouteProps> = () => {
           <Route path="template/email/:id" element={<Communication />} />
           <Route path="template/whatsapp/:id" element={<Communication />} />
 
-          <Route path="" element={<Navigate to="/templates" replace />} />
+          <Route path="" element={<Navigate to="/home" replace />} />
 
-          <Route path="*" element={<Navigate to="/templates" replace />} />
-          <Route path="/" element={<Navigate to="/templates" replace />} />
+          <Route path="*" element={<Navigate to="/home" replace />} />
+          <Route path="/" element={<Navigate to="/home" replace />} />
           <Route path="new/event" element={<NewEventCreation />} />
           <Route path="new/app" element={<AppNameCreation />} />
         </Route>

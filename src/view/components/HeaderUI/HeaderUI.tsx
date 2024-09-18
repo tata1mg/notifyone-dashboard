@@ -23,9 +23,9 @@ const HeaderUI = () =>
       <Fragment>
         <Row className="px-2 py-1" align="middle" justify="center">
           <Col>
-            <Link replace={true} to={'/templates'}>
+            <Link replace={true} to={'/home'}>
               <img
-                className="max-h-[5rem]"
+                className="max-h-[4rem]"
                 data-testid="unified-admin-logo"
                 src={notifyoneLogo}
                 alt={intl.formatMessage({

@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { JsonEditor as Editor } from 'jsoneditor-react';
-import 'jsoneditor-react/es/editor.min.css';
+import Editor from '@monaco-editor/react';
+// import 'jsoneditor-react/es/editor.min.css';
+import './communication.css';
 import {
   Col,
   Divider,
@@ -213,9 +214,10 @@ const CommunicationTemplate: React.FC<CommunicationTemplateProps> = ({
   };
 
   const onPayloadValueUpdate = (updatedPayload: any) => {
-    if (updatedPayload && Object.keys(updatedPayload).length) {
-      setPayloads(updatedPayload);
-    }
+    console.log(updatedPayload);
+    // if (updatedPayload && Object.keys(updatedPayload).length) {
+    //   setPayloads(updatedPayload);
+    // }
   };
 
   const onSaveTemplate = () => {
@@ -648,7 +650,7 @@ const CommunicationTemplate: React.FC<CommunicationTemplateProps> = ({
           />
         </Col>
       </Row>
-      {Object.keys(payloads).length > 0 && (
+      {eventDetails.event_type === COMMUNICATION_TYPE.Email && (
         <>
           <Divider />
           <Row className="pt-2" gutter={[16, 10]}>
@@ -658,13 +660,28 @@ const CommunicationTemplate: React.FC<CommunicationTemplateProps> = ({
           </Row>
           <Row className="my-4">
             <Col span={24}>
-              <Editor
-                value={payloads}
-                onChange={(updatedJson: any) =>
-                  onPayloadValueUpdate(updatedJson)
-                }
-                mode="code"
-              />
+              <div className="jsonEditor">
+                <Editor
+                  height="150px"
+                  onChange={(updatedJson: any) =>
+                    onPayloadValueUpdate(updatedJson)
+                  }
+                  language="json"
+                  // defaultValue={
+                  //   typeof payloads === 'object' &&
+                  //   !Array.isArray(payloads) &&
+                  //   payloads !== null
+                  //     ? payloads
+                  //     : {}
+                  // }
+                  lineNumbers={false}
+                  options={{
+                    codeLens: false,
+                    minimap: { enabled: false },
+                    lineNumbers: 'off',
+                  }}
+                />
+              </div>
             </Col>
           </Row>
         </>
