@@ -1,9 +1,12 @@
 .leftPanel {
     width: 35%;
+    height: 100%;
+    padding-top: 12px;
 }
 
 .rightPanel {
     width: 75%;
+    height: 100%;
 }
 
 .channel-card {

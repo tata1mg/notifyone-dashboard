@@ -105,7 +105,7 @@ body {
 
 /* header menu css (end) */
 
-.ant-table-thead>tr>th {
+/* .ant-table-thead>tr>th {
   font-weight: 600;
   background: #1890ff2e !important;
   border-right: 1px solid rgb(0 0 0 / 13%) !important;
@@ -131,7 +131,7 @@ body {
 .ant-table-tbody>tr>td {
   word-break: break-word !important;
   width: 380px;
-}
+} */
 
 .jsoneditor-mode-code {
   height: 360px !important;

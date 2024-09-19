@@ -54,7 +54,7 @@ export const fetchHomePageData = () => {
     axios
       .get(
         // `${AppConfig.serverDomain}${AppConfig.emailEventsUpdate}?id=${option}`
-        'https://run.mocky.io/v3/d0e6f9ea-e6dd-48dd-b553-20690636711b'
+        'https://run.mocky.io/v3/2a64d1cb-3049-4740-9e25-0b84bcd2371a'
       )
       .then((response: any) => {
         // const data = response?.data?.result?.templates;

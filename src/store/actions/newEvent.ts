@@ -142,8 +142,6 @@ export const createNewEvent = (formData: object) => {
  * Method to fetch form structure for App Name creation
  */
 export const fetchAppNameFormStructure = () => {
-  console.log('fetchAppNameFormStructure');
-
   return (dispatch: any) => {
     dispatch(fetchFormStructureRequest());
     axios
