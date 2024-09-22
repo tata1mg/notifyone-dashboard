@@ -2,18 +2,13 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 // import { COMMUNICATION_TYPE } from 'src/common/constants';
-// import AppConfig from 'src/common/appConfig';
+import AppConfig from 'src/common/appConfig';
 
 import {
   FETCH_HOME_DATA_FAILURE,
   FETCH_HOME_DATA_REQUEST,
   FETCH_HOME_DATA_SUCCESS,
 } from '../constants';
-// import {
-//   addToCurrentEvent,
-//   removeToCurrentEvent,
-//   switchCurrentEventLoading,
-// } from './currentEvents';
 
 /**
  * @public
@@ -45,21 +40,16 @@ export const fetchHomePageFailure = (error: any) => {
 };
 
 /**
- * Method to fetch a single email event
+ * Method to fetch a home page data
  * @param
  */
 export const fetchHomePageData = () => {
   return (dispatch: EmailDispatchType) => {
     dispatch(fetchHomePageRequest());
     axios
-      .get(
-        // `${AppConfig.serverDomain}${AppConfig.emailEventsUpdate}?id=${option}`
-        'https://run.mocky.io/v3/2a64d1cb-3049-4740-9e25-0b84bcd2371a'
-      )
+      .get(`${AppConfig.serverDomain}/dashboard/home`)
       .then((response: any) => {
-        // const data = response?.data?.result?.templates;
-        console.log('response -> ', response.data);
-        dispatch(fetchHomePageSuccess(response.data));
+        dispatch(fetchHomePageSuccess(response.data.data));
       })
       .catch((error: any) => {
         toast.error(

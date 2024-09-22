@@ -32,7 +32,6 @@ const HomePage = () => {
     dispatch(fetchHomePageData());
   }, []);
 
-  // const { channels, key_metrics, real_time_status } = homePageData;
   const getCollapseItems = (): CollapseProps['items'] => {
     return [
       {
@@ -86,14 +85,19 @@ const HomePage = () => {
             <div>
               <Flex style={{ height: '100%' }}>
                 <div className="leftPanel">
-                  {homePageData && (
+                  {homePageData?.key_metrics && (
                     <KeymetricsComponent
                       keyMetrics={homePageData?.key_metrics}
                     />
                   )}
                 </div>
                 <Row className="rightPanel">
-                  {homePageData?.channels?.map(
+                  <Col span={24}>
+                    <Title level={3}>
+                      {homePageData?.channels?.title || 'Available Channels'}
+                    </Title>
+                  </Col>
+                  {homePageData?.channels?.list?.map(
                     (channel: ChannelType, index: number) => {
                       return (
                         <Col key={index} md={24} lg={12}>

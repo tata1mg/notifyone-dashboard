@@ -48,12 +48,12 @@ const ChannelCard = ({ channel }: { channel: ChannelType }) => {
         <Row>
           <Col span={24}>
             <Text italic>
-              Notifications Sent: <Tag color="blue">{notifications.sent}</Tag>
+              Notifications Sent: <Tag color="blue">{notifications?.sent}</Tag>
             </Text>
           </Col>
           <Col span={24}>
             <Text italic>
-              Successful: <Tag color="green">{notifications.success_rate}</Tag>
+              Successful: <Tag color="green">{notifications?.success_rate}</Tag>
             </Text>
           </Col>
         </Row>
