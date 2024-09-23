@@ -20,6 +20,7 @@ const HomePage = lazy(() => import('src/view/pages/HomePage/HomePage'));
 const ProvidersPage = lazy(
   () => import('src/view/pages/ProvidersPage/ProvidersPage')
 );
+const AppsListPage = lazy(() => import('src/view/pages/AppsListPage/AppsList'));
 
 interface AppRouteProps {
   changeLocale: Dispatch<SetStateAction<string>>;
@@ -51,9 +52,10 @@ const AppRoutes: React.FC<AppRouteProps> = () => {
           <Route path="template/transaction/:id" element={<Communication />} />
           <Route path="template/email/:id" element={<Communication />} />
           <Route path="template/whatsapp/:id" element={<Communication />} />
-
           <Route path="new/event" element={<NewEventCreation />} />
-          <Route path="new/app" element={<AppNameCreation />} />
+
+          <Route path="apps" element={<AppsListPage />} />
+          <Route path="apps/new" element={<AppNameCreation />} />
         </Route>
       </Routes>
     </Suspense>

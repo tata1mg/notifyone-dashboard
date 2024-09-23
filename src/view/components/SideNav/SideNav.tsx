@@ -8,13 +8,13 @@ import {
   FileTextOutlined,
   WhatsAppOutlined,
   NotificationOutlined,
-  Html5Outlined,
+  AlignRightOutlined,
   MailOutlined,
-  PlusOutlined,
-  FormOutlined,
   AppstoreOutlined,
   HomeOutlined,
   UnorderedListOutlined,
+  FileAddOutlined,
+  AppstoreAddOutlined,
 } from '@ant-design/icons';
 
 import './sideNav.css';
@@ -53,36 +53,50 @@ const menuItems = [
     <Link to="/providers">Providers</Link>,
     <UnorderedListOutlined />
   ),
-  getItem('text_only', 'Text Only', <FileTextOutlined />, [
-    getItem('sms', <Link to="/templates/sms">SMS</Link>, <MessageOutlined />),
+  getItem('events', 'Events', <FileTextOutlined />, [
     getItem(
-      'whatsapp',
-      <Link to="/templates/whatsapp">Whatsapp</Link>,
-      <WhatsAppOutlined />
+      'templates',
+      <Link to="/templates">Templates</Link>,
+      <AlignRightOutlined />,
+      [
+        getItem(
+          'email',
+          <Link to="/templates/email">Email</Link>,
+          <MailOutlined />
+        ),
+        getItem(
+          'sms',
+          <Link to="/templates/sms">SMS</Link>,
+          <MessageOutlined />
+        ),
+        getItem(
+          'whatsapp',
+          <Link to="/templates/whatsapp">Whatsapp</Link>,
+          <WhatsAppOutlined />
+        ),
+        getItem(
+          'transaction',
+          <Link to="/templates/transaction">Push</Link>,
+          <NotificationOutlined />
+        ),
+      ]
     ),
     getItem(
-      'transaction',
-      <Link to="/templates/transaction">Transactional Push Notification</Link>,
-      <NotificationOutlined />
+      'create_event',
+      <Link to="/new/event">New Event</Link>,
+      <FileAddOutlined />
     ),
   ]),
-  getItem('html_based', 'HTML Based', <Html5Outlined />, [
+  getItem('tenants', 'Tenants', <AppstoreOutlined />, [
     getItem(
-      'email',
-      <Link to="/templates/email">Email</Link>,
-      <MailOutlined />
-    ),
-  ]),
-  getItem('create', 'Create', <PlusOutlined />, [
-    getItem(
-      'event',
-      <Link to="/new/event">Event Creation</Link>,
-      <FormOutlined />
+      'apps',
+      <Link to="/apps">Apps List</Link>,
+      <UnorderedListOutlined />
     ),
     getItem(
-      'app',
-      <Link to="/new/app">App Creation</Link>,
-      <AppstoreOutlined />
+      'create_app',
+      <Link to="/apps/new">App Creation</Link>,
+      <AppstoreAddOutlined />
     ),
   ]),
 ];
@@ -101,28 +115,37 @@ const SideNav = ({ collapsed, setCollapsed }: SideNavProps) => {
       case '/providers':
         highlightedMenu = ['providers'];
         break;
+
+      case '/templates':
+        highlightedMenu = ['templates'];
+        break;
+
       case '/templates/sms':
-        highlightedMenu = ['sms'];
+        highlightedMenu = ['templates', 'sms'];
         break;
 
       case '/templates/whatsapp':
-        highlightedMenu = ['whatsapp'];
+        highlightedMenu = ['templates', 'whatsapp'];
         break;
 
       case '/templates/transaction':
-        highlightedMenu = ['transaction'];
+        highlightedMenu = ['templates', 'transaction'];
         break;
 
       case '/templates/email':
-        highlightedMenu = ['email'];
+        highlightedMenu = ['templates', 'email'];
         break;
 
       case '/new/event':
-        highlightedMenu = ['event'];
+        highlightedMenu = ['create_event'];
         break;
 
-      case '/new/app':
-        highlightedMenu = ['app'];
+      case '/apps':
+        highlightedMenu = ['apps'];
+        break;
+
+      case '/apps/new':
+        highlightedMenu = ['create_app'];
         break;
 
       default:
@@ -134,19 +157,23 @@ const SideNav = ({ collapsed, setCollapsed }: SideNavProps) => {
   const expandedMenuItem = () => {
     let expandedMenu = [''];
     switch (currentPathname) {
+      case '/templates':
+        expandedMenu = ['events'];
+        break;
+      case '/templates/email':
       case '/templates/sms':
       case '/templates/whatsapp':
       case '/templates/transaction':
-        expandedMenu = ['text_only'];
-        break;
-
-      case '/templates/email':
-        expandedMenu = ['html_based'];
+        expandedMenu = ['events', 'templates'];
         break;
 
       case '/new/event':
-      case '/new/app':
-        expandedMenu = ['create'];
+        expandedMenu = ['events'];
+        break;
+
+      case '/apps':
+      case '/apps/new':
+        expandedMenu = ['tenants'];
         break;
       default:
         break;
