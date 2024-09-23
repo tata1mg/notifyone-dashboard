@@ -32,7 +32,11 @@ const ChannelQueuesTable = ({ channelQueues }: { channelQueues: object[] }) => {
   ];
 
   useEffect(() => {
-    setTableData(channelQueues);
+    if (channelQueues.length) {
+      setTableData(channelQueues);
+    } else {
+      setTableData([]);
+    }
   }, [channelQueues]);
 
   return <Table dataSource={tableData} columns={columns} pagination={false} />;

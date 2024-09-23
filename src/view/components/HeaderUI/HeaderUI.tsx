@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 // import { Select } from 'antd';
 import { Col, Row } from 'antd';
 import { Link } from 'react-router-dom';
-import { useIntl } from 'react-intl';
+// import { useIntl } from 'react-intl';
 
 import notifyoneLogo from 'src/assets/image/logo.png';
 // import { unifiedAdminCommunicationLogo } from 'src/assets/image/communication';
@@ -13,7 +13,7 @@ import notifyoneLogo from 'src/assets/image/logo.png';
 const HeaderUI = () =>
   // { changeLocale, locale, name }: any
   {
-    const intl = useIntl();
+    // const intl = useIntl();
     // const username =
     //   name && name.lastIndexOf('@')
     //     ? name.substring(0, name.lastIndexOf('@'))
@@ -28,9 +28,7 @@ const HeaderUI = () =>
                 className="max-h-[4rem]"
                 data-testid="unified-admin-logo"
                 src={notifyoneLogo}
-                alt={intl.formatMessage({
-                  id: 'notifyone_logo',
-                })}
+                alt={'notifyone_logo'}
               />
             </Link>
           </Col>

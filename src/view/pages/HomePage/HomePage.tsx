@@ -4,7 +4,7 @@ import { Col, Collapse, Flex, Row, Typography } from 'antd';
 import type { CollapseProps } from 'antd';
 import { RootState } from 'src/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchHomePageData } from 'src/store/actions/homePage';
+import { fetchHomePageData } from 'src/store/actions/actions';
 import { Spinner } from 'src/view/components/Spinner';
 import KeymetricsComponent from './KeymetricsComponent';
 import './homepage.css';
@@ -23,9 +23,11 @@ const { Title } = Typography;
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const homePageData = useSelector((state: RootState) => state.homePage.data);
+  const homePageData = useSelector(
+    (state: RootState) => state.reducer.homePageData
+  );
   const homePageLoading = useSelector(
-    (state: RootState) => state.homePage.loading
+    (state: RootState) => state.reducer.loading
   );
 
   useEffect(() => {

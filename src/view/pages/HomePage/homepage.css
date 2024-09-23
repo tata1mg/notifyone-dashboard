@@ -30,4 +30,7 @@
     font-size: 14px;
 }
 
-.channel-card-button:hover {}
+.keyMetricsCard {
+    width: 80%;
+    margin-bottom: 12px
+}
