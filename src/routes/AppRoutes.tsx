@@ -56,6 +56,9 @@ const AppRoutes: React.FC<AppRouteProps> = () => {
 
           <Route path="apps" element={<AppsListPage />} />
           <Route path="apps/new" element={<AppNameCreation />} />
+
+          <Route path="activity" element={<div>Activity feed</div>} />
+          <Route path="settings" element={<div>Settings</div>} />
         </Route>
       </Routes>
     </Suspense>

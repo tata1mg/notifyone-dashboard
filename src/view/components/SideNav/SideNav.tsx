@@ -15,6 +15,8 @@ import {
   UnorderedListOutlined,
   FileAddOutlined,
   AppstoreAddOutlined,
+  SettingOutlined,
+  InteractionOutlined,
 } from '@ant-design/icons';
 
 import './sideNav.css';
@@ -99,6 +101,16 @@ const menuItems = [
       <AppstoreAddOutlined />
     ),
   ]),
+  getItem(
+    'activity',
+    <Link to="/activity">Activity Feed</Link>,
+    <InteractionOutlined />
+  ),
+  getItem(
+    'settings',
+    <Link to="/settings">Settings</Link>,
+    <SettingOutlined />
+  ),
 ];
 
 const SideNav = ({ collapsed, setCollapsed }: SideNavProps) => {
@@ -146,6 +158,14 @@ const SideNav = ({ collapsed, setCollapsed }: SideNavProps) => {
 
       case '/apps/new':
         highlightedMenu = ['create_app'];
+        break;
+
+      case '/activity':
+        highlightedMenu = ['activity'];
+        break;
+
+      case '/settings':
+        highlightedMenu = ['settings'];
         break;
 
       default:
