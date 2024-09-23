@@ -3,20 +3,10 @@ export const allowedConfigs = {
   communication: [
     'appUrl',
     'communicationAppUrlPort',
-    'emailEvents',
     'emailEventsUpdate',
-    'platformLogin',
     'previewEmailEvent',
-    'pushNotificationEvents',
-    'pushNotificationEventsUpdate',
     'sentry',
     'serverDomain',
-    'smsEvents',
-    'smsEventsUpdate',
-    'useMockAPI',
-    'whatsAppEvents',
-    'whatsAppEventsUpdate',
-    'ravenAppEndpoint',
   ],
 };
 
