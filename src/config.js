@@ -13,22 +13,10 @@ export const allowedConfigs = {
     'serverDomain',
     'smsEvents',
     'smsEventsUpdate',
-    'tata1mgLogo',
     'useMockAPI',
     'whatsAppEvents',
     'whatsAppEventsUpdate',
     'ravenAppEndpoint',
-  ],
-  user: [
-    'appUrl',
-    'login',
-    'userAppUrlPort',
-    'sentry',
-    'loginRoute',
-    'serverDomain',
-    'userRole',
-    'userInfoRoute',
-    'usermanagementURL',
   ],
 };
 
