@@ -13,6 +13,7 @@ import {
   PlusOutlined,
   FormOutlined,
   AppstoreOutlined,
+  HomeOutlined,
 } from '@ant-design/icons';
 
 import './sideNav.css';
@@ -45,6 +46,7 @@ const getItem = (
 };
 
 const menuItems = [
+  getItem('home', <Link to="/home">Home</Link>, <HomeOutlined />),
   getItem('text_only', 'Text Only', <FileTextOutlined />, [
     getItem('sms', <Link to="/templates/sms">SMS</Link>, <MessageOutlined />),
     getItem(
@@ -87,6 +89,9 @@ const SideNav = ({ collapsed, setCollapsed }: SideNavProps) => {
     let highlightedMenu: string[] = [''];
 
     switch (currentPathname) {
+      case '/home':
+        highlightedMenu = ['home'];
+        break;
       case '/templates/sms':
         highlightedMenu = ['sms'];
         break;
@@ -194,7 +199,7 @@ const SideNav = ({ collapsed, setCollapsed }: SideNavProps) => {
                 style={{
                   background: 'rgba(255, 255, 255, 0.3)',
                   width: '8rem',
-                  height: '3rem',
+                  height: '2.5rem',
                 }}
                 src={logo}
                 alt="1mg Icon"
@@ -204,7 +209,7 @@ const SideNav = ({ collapsed, setCollapsed }: SideNavProps) => {
         )}
       </Row>
 
-      <Divider style={{ margin: 8 }} />
+      <Divider style={{ margin: 0 }} />
 
       <Menu
         defaultSelectedKeys={highlightMenuItem()}

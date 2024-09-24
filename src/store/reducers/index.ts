@@ -7,6 +7,7 @@ import whatsAppEventsReducer from './whatsappEvents.reducer';
 import ravenRootEventsReducer from './ravenRootNodeEvents.reducer';
 import currentEventsReducer from './currentEvent.reducer';
 import newEventReducer from './newEvent.reducer';
+import homePageReducer from './homePage.reducer';
 
 const rootReducer = combineReducers({
   emailEvents: emailEventsReducer,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   whatsAppEvents: whatsAppEventsReducer,
   currentEvent: currentEventsReducer,
   ravenRootEventsReducer: ravenRootEventsReducer,
+  homePage: homePageReducer,
 });
 
 export default rootReducer;

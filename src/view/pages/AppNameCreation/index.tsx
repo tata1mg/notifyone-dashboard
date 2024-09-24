@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { CreateForm } from '@tata1mg/formzen';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -25,20 +25,18 @@ const AppNameCreation = () => {
   }, [appNameCreated]);
 
   return (
-    <Fragment>
-      <div className="content-wrapper">
-        <Spin spinning={loading}>
-          <CreateForm
-            formConfig={{
-              onSubmit: onSubmit,
-              formName: `example_form`,
-              structure: formStructure,
-              mode: 'create', // create | view | edit
-            }}
-          />
-        </Spin>
-      </div>
-    </Fragment>
+    <div className="content-wrapper">
+      <Spin spinning={loading}>
+        <CreateForm
+          formConfig={{
+            onSubmit: onSubmit,
+            formName: `example_form`,
+            structure: formStructure,
+            mode: 'create', // create | view | edit
+          }}
+        />
+      </Spin>
+    </div>
   );
 };
 export default AppNameCreation;

@@ -7,7 +7,6 @@ import {
 } from 'src/store/actions/newEvent';
 import { RootState } from 'src/store';
 import { Spin } from 'antd';
-import './index.css';
 const NewEventCreation = () => {
   const dispatch = useDispatch();
   const onSubmit = (formData: any) => {
@@ -26,7 +25,7 @@ const NewEventCreation = () => {
 
   return (
     <Fragment>
-      <div className="margin">
+      <div className="content-wrapper">
         <Spin spinning={loading}>
           <CreateForm
             formConfig={{
