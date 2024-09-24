@@ -7,6 +7,9 @@ import {
   FETCH_PROVIDERS_LIST_SUCCESS,
   FETCH_ADD_PROVIDERS_LIST_SUCCESS,
   FETCH_ADD_PROVIDERS_LIST_REQUEST,
+  FETCH_APPS_LIST_REQUEST,
+  FETCH_APPS_LIST_FAILURE,
+  FETCH_APPS_LIST_SUCCESS,
 } from '../constants';
 
 const initialState: IPageState = {
@@ -16,6 +19,7 @@ const initialState: IPageState = {
   providersList: null,
   allProviders: null,
   allProvidersLoading: false,
+  appsList: [],
 };
 
 const actionsReducer = (state = initialState, action: CurrentAction): any => {
@@ -70,6 +74,26 @@ const actionsReducer = (state = initialState, action: CurrentAction): any => {
         ...state,
         allProviders: action.payload,
         allProvidersLoading: false,
+      };
+
+    case FETCH_APPS_LIST_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case FETCH_APPS_LIST_SUCCESS:
+      return {
+        ...state,
+        appsList: action.payload,
+        loading: false,
+      };
+
+    case FETCH_APPS_LIST_FAILURE:
+      return {
+        ...state,
+        appsList: [],
+        error: action.payload,
+        loading: false,
       };
 
     default:

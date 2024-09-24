@@ -13,6 +13,9 @@ import {
   FETCH_PROVIDERS_LIST_SUCCESS,
   FETCH_ADD_PROVIDERS_LIST_SUCCESS,
   FETCH_ADD_PROVIDERS_LIST_REQUEST,
+  FETCH_APPS_LIST_REQUEST,
+  FETCH_APPS_LIST_FAILURE,
+  FETCH_APPS_LIST_SUCCESS,
 } from '../constants';
 
 /**
@@ -93,7 +96,36 @@ export const fetchAddProvidersListSuccess = (data: any) => {
 };
 
 /**
- * Method to fetch a home page data
+ * @public
+ */
+export const fetchAppsListRequest = () => {
+  return {
+    type: FETCH_APPS_LIST_REQUEST,
+  };
+};
+
+/**
+ * @public
+ */
+export const fetchAppsListSuccess = (data: any) => {
+  return {
+    type: FETCH_APPS_LIST_SUCCESS,
+    payload: data,
+  };
+};
+
+/**
+ * @public
+ */
+export const fetchAppsListFailure = (error: any) => {
+  return {
+    type: FETCH_APPS_LIST_FAILURE,
+    payload: error,
+  };
+};
+
+/**
+ * Method to fetch home page data
  * @param
  */
 export const fetchHomePageData = () => {
@@ -114,7 +146,7 @@ export const fetchHomePageData = () => {
 };
 
 /**
- * Method to fetch a home page data
+ * Method to fetch data for table of providers configured
  * @param
  */
 export const fetchProvidersList = () => {
@@ -135,7 +167,7 @@ export const fetchProvidersList = () => {
 };
 
 /**
- * Method to fetch a home page data
+ * Method to fetch data to add new providers
  * @param
  */
 export const fetchAddProvidersList = () => {
@@ -151,6 +183,30 @@ export const fetchAddProvidersList = () => {
           `Failed to fetch Email Event ${error?.response?.data?.error}`
         );
         dispatch(fetchProvidersListFailure(error?.response?.data?.error));
+      });
+  };
+};
+
+/**
+ * Method to fetch all apps list
+ * @param
+ */
+export const fetchAppsList = () => {
+  return (dispatch: EmailDispatchType) => {
+    dispatch(fetchAppsListRequest());
+    axios
+      .get(
+        // `${AppConfig.serverDomain}/dashboard/providers/list`
+        'https://run.mocky.io/v3/949a2862-501c-4264-b310-eb305f7eb507'
+      )
+      .then((response: any) => {
+        dispatch(fetchAppsListSuccess(response.data?.data));
+      })
+      .catch((error: any) => {
+        toast.error(
+          `Failed to fetch Email Event ${error?.response?.data?.error}`
+        );
+        dispatch(fetchAppsListFailure(error?.response?.data?.error));
       });
   };
 };

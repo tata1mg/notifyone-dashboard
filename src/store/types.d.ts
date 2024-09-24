@@ -171,6 +171,8 @@ interface IPageState {
   homePageData: null | object;
   providersList: null | object;
   allProviders: null | object;
+  allProvidersLoading: boolean;
+  appsList: object[];
 }
 
 /* Raven Interfaces */
