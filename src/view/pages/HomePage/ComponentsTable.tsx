@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Tag } from 'antd';
-import { getHealthColor } from 'src/common1/utils';
+import { getHealthColor } from 'src/common/utils/index';
 
 const ComponentsTable = ({ components }: { components: object[] }) => {
   const [tableData, setTableData] = useState<object[]>([]);

@@ -48,7 +48,5 @@ Thumbs.db
 *.mov
 *.wmv
 
-#config
-server/config.json
+# config
 src/config.json
-

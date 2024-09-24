@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Tag } from 'antd';
-import { getHealthColor } from 'src/common1/utils';
+import { getHealthColor } from 'src/common/utils/index';
 
 const ChannelQueuesTable = ({ channelQueues }: { channelQueues: object[] }) => {
   const [tableData, setTableData] = useState<object[]>([]);
