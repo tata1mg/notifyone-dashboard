@@ -29,14 +29,14 @@ WORKDIR /home/ubuntu/apps/$SERVICE_NAME
 # Copy code folder
 COPY . .
 
-RUN npm i --legacy-peer-deps
-RUN cd server/
-RUN npm i --legacy-peer-deps
-RUN cd ../
+RUN npm i
+# RUN cd server/
+# RUN npm i --legacy-peer-deps
+# RUN cd ../
 
 # Start the FE service
-CMD ["npm", "run", "dev"]
+CMD ["npm", "start"]
 
 # Start the server
-RUN cd server/
-CMD ["npm", "start"]
+# RUN cd server/
+# CMD ["npm", "start"]
