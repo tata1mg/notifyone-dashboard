@@ -23,7 +23,7 @@ const AddProvider = ({
   );
 
   useEffect(() => {
-    if (providerDrawer && !allProviders) {
+    if (providerDrawer) {
       dispatch(fetchAddProvidersList());
     }
   }, [providerDrawer]);

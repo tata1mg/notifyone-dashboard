@@ -102,7 +102,7 @@ export const fetchHomePageData = () => {
     axios
       .get(`${AppConfig.serverDomain}/dashboard/home`)
       .then((response: any) => {
-        dispatch(fetchHomePageSuccess(response.data.data));
+        dispatch(fetchHomePageSuccess(response.data?.data));
       })
       .catch((error: any) => {
         toast.error(
@@ -121,12 +121,9 @@ export const fetchProvidersList = () => {
   return (dispatch: EmailDispatchType) => {
     dispatch(fetchProvidersListRequest());
     axios
-      .get(
-        // `${AppConfig.serverDomain}/dashboard/home`
-        'https://run.mocky.io/v3/c0e02f05-4bee-46a0-85a8-d66cb08fb34b'
-      )
+      .get(`${AppConfig.serverDomain}/dashboard/providers/configured`)
       .then((response: any) => {
-        dispatch(fetchProvidersListSuccess(response.data));
+        dispatch(fetchProvidersListSuccess(response.data?.data));
       })
       .catch((error: any) => {
         toast.error(
@@ -145,12 +142,9 @@ export const fetchAddProvidersList = () => {
   return (dispatch: EmailDispatchType) => {
     dispatch(fetchAddProvidersListRequest());
     axios
-      .get(
-        // `${AppConfig.serverDomain}/dashboard/home`
-        'https://run.mocky.io/v3/0afba304-18f5-4125-842f-f525326c3d5d'
-      )
+      .get(`${AppConfig.serverDomain}/dashboard/providers/list`)
       .then((response: any) => {
-        dispatch(fetchAddProvidersListSuccess(response.data));
+        dispatch(fetchAddProvidersListSuccess(response.data?.data));
       })
       .catch((error: any) => {
         toast.error(
