@@ -21,6 +21,9 @@ const ProvidersPage = lazy(
   () => import('src/view/pages/ProvidersPage/ProvidersPage')
 );
 const AppsListPage = lazy(() => import('src/view/pages/AppsListPage/AppsList'));
+const ActivityFeed = lazy(
+  () => import('src/view/pages/ActivityFeedPage/ActivityFeed')
+);
 
 interface AppRouteProps {
   changeLocale: Dispatch<SetStateAction<string>>;
@@ -57,7 +60,7 @@ const AppRoutes: React.FC<AppRouteProps> = () => {
           <Route path="apps" element={<AppsListPage />} />
           <Route path="apps/new" element={<AppNameCreation />} />
 
-          <Route path="activity" element={<div>Activity feed</div>} />
+          <Route path="activity" element={<ActivityFeed />} />
           <Route path="settings" element={<div>Settings</div>} />
         </Route>
       </Routes>

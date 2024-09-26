@@ -173,6 +173,9 @@ interface IPageState {
   allProviders: null | object;
   allProvidersLoading: boolean;
   appsList: object[];
+  editAppFormStructure: null | object;
+  editAppFormLoading: boolean;
+  activityData: object[];
 }
 
 /* Raven Interfaces */

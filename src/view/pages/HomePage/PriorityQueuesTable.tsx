@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Tag } from 'antd';
-import { getHealthColor } from 'src/common/utils/index';
+import { getTagColor } from 'src/common/utils/index';
 
 const PriorityQueuesTable = ({
   priorityQueues,
@@ -20,7 +20,7 @@ const PriorityQueuesTable = ({
       dataIndex: 'health',
       key: 'health',
       render: (value: string) => {
-        return <Tag color={getHealthColor(value)}>{value}</Tag>;
+        return <Tag color={getTagColor(value)}>{value}</Tag>;
       },
     },
     {

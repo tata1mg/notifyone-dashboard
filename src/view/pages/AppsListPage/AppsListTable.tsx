@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Table, TablePaginationConfig, Typography } from 'antd';
 // import { useDispatch } from 'react-redux';
 // import { fetchAppsList } from 'src/store/actions/actions';
-// import { getHealthColor } from 'src/common/utils/index';
+// import { getTagColor } from 'src/common/utils/index';
 // import { render } from '@testing-library/react';
 
 const { Text } = Typography;
@@ -68,8 +68,8 @@ const AppsListTable = ({
     },
     {
       title: 'Last updated',
-      dataIndex: 'last_updated',
-      key: 'last_updated',
+      dataIndex: 'updated',
+      key: 'updated',
     },
   ];
 
@@ -92,6 +92,7 @@ const AppsListTable = ({
         onClick: () => setEditAppData(record),
       })}
       onChange={handleTableChange}
+      style={{ cursor: 'pointer' }}
     />
   );
 };
