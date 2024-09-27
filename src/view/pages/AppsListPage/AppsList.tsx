@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Drawer, Space, Spin, Typography } from 'antd';
+import { Button, Drawer, Flex, Space, Spin, Typography } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { CreateForm } from '@tata1mg/formzen';
 import { RootState } from 'src/store';
@@ -8,11 +8,13 @@ import {
   fetchEditAppFormStructure,
 } from 'src/store/actions/actions';
 import AppsListTable from './AppsListTable';
+import { useNavigate } from 'react-router-dom';
 
 const { Title, Text } = Typography;
 
 const AppsList = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const appsList = useSelector((state: RootState) => state.reducer.appsList);
   const loading = useSelector((state: RootState) => state.reducer.loading);
   const [editAppData, setEditAppData] = useState<object | null>(null);
@@ -41,7 +43,13 @@ const AppsList = () => {
   return (
     <div className="content-wrapper">
       <Space style={{ width: '100%' }} direction="vertical">
-        <Title level={3}>{appsList?.title}</Title>
+        <Flex justify="space-between">
+          <Title level={3}>{appsList?.title}</Title>
+          <Button onClick={() => navigate('new')} type="primary">
+            Create New App
+          </Button>
+        </Flex>
+
         <AppsListTable
           loading={loading}
           tenants={appsList?.tenants}
