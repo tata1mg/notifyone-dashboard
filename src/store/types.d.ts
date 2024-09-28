@@ -176,7 +176,15 @@ interface IPageState {
   editAppFormStructure: null | object;
   editAppFormLoading: boolean;
   activityData: object[];
+  priorityList: object[];
 }
+
+type Action = {
+  type?: string;
+  payload?: any;
+};
+
+type ActionDispatchType = (args: Action) => Action | any;
 
 /* Raven Interfaces */
 interface IRavenRootNodeState {

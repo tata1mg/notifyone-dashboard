@@ -22,6 +22,9 @@ import {
   FETCH_EDIT_APP_FORM_REQUEST,
   FETCH_EDIT_APP_FORM_FAILURE,
   FETCH_EDIT_APP_FORM_SUCCESS,
+  FETCH_PRIORITY_LIST_REQUEST,
+  FETCH_PRIORITY_LIST_SUCCESS,
+  FETCH_PRIORITY_LIST_FAILURE,
 } from '../constants';
 
 /**
@@ -189,11 +192,40 @@ export const fetchActivityFeedFailure = (error: any) => {
 };
 
 /**
+ * @public
+ */
+export const fetchPriorityListRequest = () => {
+  return {
+    type: FETCH_PRIORITY_LIST_REQUEST,
+  };
+};
+
+/**
+ * @public
+ */
+export const fetchPriorityListSuccess = (data: any) => {
+  return {
+    type: FETCH_PRIORITY_LIST_SUCCESS,
+    payload: data,
+  };
+};
+
+/**
+ * @public
+ */
+export const fetchPriorityListFailure = (error: any) => {
+  return {
+    type: FETCH_PRIORITY_LIST_FAILURE,
+    payload: error,
+  };
+};
+
+/**
  * Method to fetch home page data
  * @param
  */
 export const fetchHomePageData = () => {
-  return (dispatch: EmailDispatchType) => {
+  return (dispatch: ActionDispatchType) => {
     dispatch(fetchHomePageRequest());
     axios
       .get(`${AppConfig.serverDomain}/dashboard/home`)
@@ -214,7 +246,7 @@ export const fetchHomePageData = () => {
  * @param
  */
 export const fetchProvidersList = () => {
-  return (dispatch: EmailDispatchType) => {
+  return (dispatch: ActionDispatchType) => {
     dispatch(fetchProvidersListRequest());
     axios
       .get(`${AppConfig.serverDomain}/dashboard/providers/configured`)
@@ -235,7 +267,7 @@ export const fetchProvidersList = () => {
  * @param
  */
 export const fetchAddProvidersList = () => {
-  return (dispatch: EmailDispatchType) => {
+  return (dispatch: ActionDispatchType) => {
     dispatch(fetchAddProvidersListRequest());
     axios
       .get(`${AppConfig.serverDomain}/dashboard/providers/list`)
@@ -256,7 +288,7 @@ export const fetchAddProvidersList = () => {
  * @param
  */
 export const fetchAppsList = () => {
-  return (dispatch: EmailDispatchType) => {
+  return (dispatch: ActionDispatchType) => {
     dispatch(fetchAppsListRequest());
     axios
       .get(`${AppConfig.serverDomain}/apps`)
@@ -277,7 +309,7 @@ export const fetchAppsList = () => {
  * @param
  */
 export const fetchEditAppFormStructure = (id: string | number) => {
-  return (dispatch: EmailDispatchType) => {
+  return (dispatch: ActionDispatchType) => {
     dispatch(fetchEditAppFormRequest());
     axios
       .get(`${AppConfig.serverDomain}/form-structure/update-app/${id}`)
@@ -306,7 +338,7 @@ export const fetchActivityFeed = ({
   requestId: string;
   email: string;
 }) => {
-  return (dispatch: EmailDispatchType) => {
+  return (dispatch: ActionDispatchType) => {
     dispatch(fetchActivityFeedRequest());
     axios
       .get(
@@ -330,4 +362,56 @@ export const fetchActivityFeed = ({
         dispatch(fetchActivityFeedFailure(error?.response?.data?.error));
       });
   };
+};
+
+/**
+ * Method to fetch providers list
+ * @param
+ */
+export const fetchProvidersPriorityList = () => {
+  return (dispatch: ActionDispatchType) => {
+    dispatch(fetchPriorityListRequest());
+    axios
+      .get(
+        // `${AppConfig.serverDomain}/form-structure/update-app/${id}`
+        'https://run.mocky.io/v3/b7f562f3-f9bf-455d-9f91-52786a334253'
+      )
+      .then((response: any) => {
+        dispatch(fetchPriorityListSuccess(response.data?.data));
+      })
+      .catch((error: any) => {
+        toast.error(
+          `Failed to fetch Providers list ${error?.response?.data?.error}`
+        );
+        dispatch(fetchProvidersListFailure(error?.response?.data?.error));
+      });
+  };
+};
+
+/**
+ * Method to set providers proirity
+ * @param
+ */
+export const setProvidersPriority = ({ channel, providers_priority }) => {
+  // return (dispatch: ActionDispatchType) => {
+  //   axios
+  //     .post(
+  //       // `${AppConfig.serverDomain}/form-structure/update-app/${id}`
+  //       'https://run.mocky.io/v3/b7f562f3-f9bf-455d-9f91-52786a334253',
+  //       {
+  //         channel,
+  //         providers_priority,
+  //       }
+  //     )
+  //     .then((response: any) => {
+  //       dispatch(fetchPriorityListSuccess(response.data?.data));
+  //     })
+  //     .catch((error: any) => {
+  //       toast.error(
+  //         `Failed to fetch Providers list ${error?.response?.data?.error}`
+  //       );
+  //       dispatch(fetchProvidersListFailure(error?.response?.data?.error));
+  //     });
+  // };
+  console.log(channel, providers_priority);
 };

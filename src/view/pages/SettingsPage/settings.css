@@ -1,0 +1,8 @@
+.provider-list-item {
+    background-color: rgba(4, 59, 92, 0.1);
+    border-radius: 8px;
+    margin-bottom: 12px;
+    padding: 12px;
+    font-weight: 500;
+    cursor: pointer;
+}

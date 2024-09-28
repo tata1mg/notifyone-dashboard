@@ -16,6 +16,9 @@ import {
   FETCH_EDIT_APP_FORM_REQUEST,
   FETCH_EDIT_APP_FORM_FAILURE,
   FETCH_EDIT_APP_FORM_SUCCESS,
+  FETCH_PRIORITY_LIST_REQUEST,
+  FETCH_PRIORITY_LIST_SUCCESS,
+  FETCH_PRIORITY_LIST_FAILURE,
 } from '../constants';
 
 const initialState: IPageState = {
@@ -29,6 +32,7 @@ const initialState: IPageState = {
   editAppFormStructure: null,
   editAppFormLoading: false,
   activityData: [],
+  priorityList: [],
 };
 
 const actionsReducer = (state = initialState, action: CurrentAction): any => {
@@ -141,6 +145,26 @@ const actionsReducer = (state = initialState, action: CurrentAction): any => {
       return {
         ...state,
         activityData: [],
+        error: action.payload,
+        loading: false,
+      };
+
+    case FETCH_PRIORITY_LIST_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case FETCH_PRIORITY_LIST_SUCCESS:
+      return {
+        ...state,
+        priorityList: action.payload,
+        loading: false,
+      };
+
+    case FETCH_PRIORITY_LIST_FAILURE:
+      return {
+        ...state,
+        priorityList: [],
         error: action.payload,
         loading: false,
       };

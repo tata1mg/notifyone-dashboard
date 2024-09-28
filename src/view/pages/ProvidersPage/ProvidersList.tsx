@@ -2,29 +2,29 @@ import { Flex, Avatar } from 'antd';
 // import { RightOutlined } from '@ant-design/icons';
 import React from 'react';
 
-const ChannelsList = ({
-  channelList,
+const ProvidersList = ({
+  providersList,
   selectedProvider,
   setSelectedProvider,
 }: {
-  channelList: any;
+  providersList: any;
   selectedProvider: object | null;
   setSelectedProvider: React.Dispatch<React.SetStateAction<object>>;
 }) => {
   return (
     <div style={{ height: '60vh', overflow: 'scroll' }}>
-      {channelList?.providers.map(
-        (channel: { name: string; code: string }, index: number) => {
+      {providersList?.map(
+        (provider: { name: string; code: string }, index: number) => {
           return (
             <Flex
               gap="middle"
               align="center"
               key={index}
-              className={`channel-list-item ${
-                selectedProvider?.name === channel.name ? 'active' : ''
+              className={`provider-list-item ${
+                selectedProvider?.code === provider.code ? 'active' : ''
               }`}
               onClick={() => {
-                setSelectedProvider(channel);
+                setSelectedProvider(provider);
               }}
             >
               <div>
@@ -36,7 +36,7 @@ const ChannelsList = ({
                 />
               </div>
 
-              <div>{channel.code}</div>
+              <div>{provider.name}</div>
             </Flex>
           );
         }
@@ -45,4 +45,4 @@ const ChannelsList = ({
   );
 };
 
-export default ChannelsList;
+export default ProvidersList;
