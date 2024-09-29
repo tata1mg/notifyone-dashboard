@@ -1,5 +1,5 @@
 import { Space, Tabs, Typography } from 'antd';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,12 +16,17 @@ const SettingsPage = () => {
   const priorityList = useSelector(
     (state: RootState) => state.reducer.priorityList
   );
+  const [order, setOrder] = useState<{ name: string; logo: string }[]>([]);
 
   const loading = useSelector((state: RootState) => state.reducer.loading);
 
   useEffect(() => {
     dispatch(fetchProvidersPriorityList());
   }, []);
+
+  useEffect(() => {
+    setOrder(priorityList?.channels[0].providers_priority);
+  }, [priorityList]);
 
   return (
     <>
@@ -30,7 +35,7 @@ const SettingsPage = () => {
       ) : (
         <div className="content-wrapper">
           <Space style={{ width: '100%' }} direction="vertical">
-            <Title level={3}>{priorityList.title}</Title>
+            <Title level={3}>{priorityList?.title}</Title>
             <DndProvider backend={HTML5Backend}>
               <Tabs
                 defaultActiveKey="1"
@@ -48,14 +53,17 @@ const SettingsPage = () => {
                       key: index,
                       children: (
                         <DraggableProvidersList
-                          providers={provider.providers_priority}
                           channel={provider?.code}
+                          order={order}
+                          setOrder={setOrder}
                         />
                       ),
                     };
                   }
                 )}
-                // onChange={() => dispatch(fetchProvidersPriorityList())}
+                onChange={(index: string) => {
+                  setOrder(priorityList?.channels[index].providers_priority);
+                }}
               />
             </DndProvider>
           </Space>

@@ -45,14 +45,15 @@ const DraggableWidget = ({
 };
 
 export const DraggableProvidersList = ({
-  providers,
   channel,
+  order,
+  setOrder,
 }: {
-  providers: { name: string; logo: string }[];
   channel: string;
+  order: { name: string; logo: string }[];
+  setOrder: any;
 }) => {
   const dispatch = useDispatch();
-  const [order, setOrder] = useState(providers);
 
   const rearrangeProviders = (initialIndex: number, finalIndex: number) => {
     const updatedOrder = [...order];

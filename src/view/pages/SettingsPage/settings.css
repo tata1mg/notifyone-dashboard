@@ -6,3 +6,13 @@
     font-weight: 500;
     cursor: pointer;
 }
+
+.jsonEditor {
+    border: 1px solid rgb(185, 185, 185);
+    border-radius: 8px;
+    padding: 0px 8px
+}
+
+.custom-priority {
+    margin-top: 48px;
+}

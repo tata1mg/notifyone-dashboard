@@ -25,6 +25,9 @@ import {
   FETCH_PRIORITY_LIST_REQUEST,
   FETCH_PRIORITY_LIST_SUCCESS,
   FETCH_PRIORITY_LIST_FAILURE,
+  FETCH_DYNAMIC_PRIORITY_REQUEST,
+  FETCH_DYNAMIC_PRIORITY_SUCCESS,
+  FETCH_DYNAMIC_PRIORITY_FAILURE,
 } from '../constants';
 
 /**
@@ -216,6 +219,35 @@ export const fetchPriorityListSuccess = (data: any) => {
 export const fetchPriorityListFailure = (error: any) => {
   return {
     type: FETCH_PRIORITY_LIST_FAILURE,
+    payload: error,
+  };
+};
+
+/**
+ * @public
+ */
+export const fetchDynamicPriorityRequest = () => {
+  return {
+    type: FETCH_DYNAMIC_PRIORITY_REQUEST,
+  };
+};
+
+/**
+ * @public
+ */
+export const fetchDynamicPrioritySuccess = (data: any) => {
+  return {
+    type: FETCH_DYNAMIC_PRIORITY_SUCCESS,
+    payload: data,
+  };
+};
+
+/**
+ * @public
+ */
+export const fetchDynamicPriorityFailure = (error: any) => {
+  return {
+    type: FETCH_DYNAMIC_PRIORITY_FAILURE,
     payload: error,
   };
 };
@@ -414,4 +446,28 @@ export const setProvidersPriority = ({ channel, providers_priority }) => {
   //     });
   // };
   console.log(channel, providers_priority);
+};
+
+/**
+ * Method to fetch providers list
+ * @param
+ */
+export const fetchDynamicPriority = () => {
+  return (dispatch: ActionDispatchType) => {
+    dispatch(fetchDynamicPriorityRequest());
+    axios
+      .get(
+        // `${AppConfig.serverDomain}/form-structure/update-app/${id}`
+        'https://run.mocky.io/v3/ab9fd915-f349-4253-a28d-3e82392cb91b'
+      )
+      .then((response: any) => {
+        dispatch(fetchDynamicPrioritySuccess(response.data?.data));
+      })
+      .catch((error: any) => {
+        toast.error(
+          `Failed to fetch Providers list ${error?.response?.data?.error}`
+        );
+        dispatch(fetchDynamicPriorityFailure(error?.response?.data?.error));
+      });
+  };
 };

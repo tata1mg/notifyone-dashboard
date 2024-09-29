@@ -17,6 +17,8 @@ import {
   AppstoreAddOutlined,
   SettingOutlined,
   InteractionOutlined,
+  OrderedListOutlined,
+  CodeSandboxOutlined,
 } from '@ant-design/icons';
 
 import './sideNav.css';
@@ -106,11 +108,18 @@ const menuItems = [
     <Link to="/activity">Activity Feed</Link>,
     <InteractionOutlined />
   ),
-  getItem(
-    'settings',
-    <Link to="/settings">Settings</Link>,
-    <SettingOutlined />
-  ),
+  getItem('settings', 'Settings', <SettingOutlined />, [
+    getItem(
+      'priority',
+      <Link to="/priority">Providers Priority</Link>,
+      <OrderedListOutlined />
+    ),
+    getItem(
+      'dynamic_priority',
+      <Link to="/priority/dynamic">Dynamic Priority</Link>,
+      <CodeSandboxOutlined />
+    ),
+  ]),
 ];
 
 const SideNav = ({ collapsed, setCollapsed }: SideNavProps) => {
@@ -164,8 +173,12 @@ const SideNav = ({ collapsed, setCollapsed }: SideNavProps) => {
         highlightedMenu = ['activity'];
         break;
 
-      case '/settings':
-        highlightedMenu = ['settings'];
+      case '/priority':
+        highlightedMenu = ['priority'];
+        break;
+
+      case '/priority/dynamic':
+        highlightedMenu = ['dynamic_priority'];
         break;
 
       default:
@@ -194,6 +207,11 @@ const SideNav = ({ collapsed, setCollapsed }: SideNavProps) => {
       case '/apps':
       case '/apps/new':
         expandedMenu = ['tenants'];
+        break;
+
+      case '/priority':
+      case '/priority/dynamic':
+        expandedMenu = ['settings'];
         break;
       default:
         break;

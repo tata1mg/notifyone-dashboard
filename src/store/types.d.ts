@@ -176,7 +176,8 @@ interface IPageState {
   editAppFormStructure: null | object;
   editAppFormLoading: boolean;
   activityData: object[];
-  priorityList: object[];
+  priorityList: null | object;
+  dynamicPriority: null | object;
 }
 
 type Action = {

@@ -25,7 +25,10 @@ const ActivityFeed = lazy(
   () => import('src/view/pages/ActivityFeedPage/ActivityFeed')
 );
 
-const Settings = lazy(() => import('src/view/pages/SettingsPage/SettingsPage'));
+const Priority = lazy(() => import('src/view/pages/SettingsPage/SettingsPage'));
+const DynamicPriority = lazy(
+  () => import('src/view/pages/SettingsPage/DynamicPriority')
+);
 
 interface AppRouteProps {
   changeLocale: Dispatch<SetStateAction<string>>;
@@ -63,7 +66,8 @@ const AppRoutes: React.FC<AppRouteProps> = () => {
           <Route path="apps/new" element={<AppNameCreation />} />
 
           <Route path="activity" element={<ActivityFeed />} />
-          <Route path="settings" element={<Settings />} />
+          <Route path="priority" element={<Priority />} />
+          <Route path="priority/dynamic" element={<DynamicPriority />} />
         </Route>
       </Routes>
     </Suspense>

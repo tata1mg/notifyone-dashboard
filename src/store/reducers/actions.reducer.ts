@@ -19,6 +19,9 @@ import {
   FETCH_PRIORITY_LIST_REQUEST,
   FETCH_PRIORITY_LIST_SUCCESS,
   FETCH_PRIORITY_LIST_FAILURE,
+  FETCH_DYNAMIC_PRIORITY_REQUEST,
+  FETCH_DYNAMIC_PRIORITY_SUCCESS,
+  FETCH_DYNAMIC_PRIORITY_FAILURE,
 } from '../constants';
 
 const initialState: IPageState = {
@@ -32,7 +35,8 @@ const initialState: IPageState = {
   editAppFormStructure: null,
   editAppFormLoading: false,
   activityData: [],
-  priorityList: [],
+  priorityList: null,
+  dynamicPriority: null,
 };
 
 const actionsReducer = (state = initialState, action: CurrentAction): any => {
@@ -164,7 +168,27 @@ const actionsReducer = (state = initialState, action: CurrentAction): any => {
     case FETCH_PRIORITY_LIST_FAILURE:
       return {
         ...state,
-        priorityList: [],
+        priorityList: null,
+        error: action.payload,
+        loading: false,
+      };
+
+    case FETCH_DYNAMIC_PRIORITY_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case FETCH_DYNAMIC_PRIORITY_SUCCESS:
+      return {
+        ...state,
+        dynamicPriority: action.payload,
+        loading: false,
+      };
+
+    case FETCH_DYNAMIC_PRIORITY_FAILURE:
+      return {
+        ...state,
+        dynamicPriority: null,
         error: action.payload,
         loading: false,
       };
