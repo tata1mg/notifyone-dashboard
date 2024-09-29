@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'src/store';
 import { fetchAddProvidersList } from 'src/store/actions/actions';
-import ChannelsList from './ChannelsList';
+import ProvidersList from './ProvidersList';
 
 const AddProvider = ({
   providerDrawer,
@@ -38,8 +38,10 @@ const AddProvider = ({
                 label: channel.toUpperCase(),
                 key: index,
                 children: (
-                  <ChannelsList
-                    channelList={allProviders?.channel_providers[channel]}
+                  <ProvidersList
+                    providersList={
+                      allProviders?.channel_providers[channel]?.providers
+                    }
                     selectedProvider={selectedProvider}
                     setSelectedProvider={setSelectedProvider}
                   />

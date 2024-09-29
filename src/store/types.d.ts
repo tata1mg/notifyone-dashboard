@@ -171,7 +171,21 @@ interface IPageState {
   homePageData: null | object;
   providersList: null | object;
   allProviders: null | object;
+  allProvidersLoading: boolean;
+  appsList: object[];
+  editAppFormStructure: null | object;
+  editAppFormLoading: boolean;
+  activityData: object[];
+  priorityList: null | object;
+  dynamicPriority: null | object;
 }
+
+type Action = {
+  type?: string;
+  payload?: any;
+};
+
+type ActionDispatchType = (args: Action) => Action | any;
 
 /* Raven Interfaces */
 interface IRavenRootNodeState {

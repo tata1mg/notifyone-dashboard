@@ -22,7 +22,7 @@ const ChannelCard = ({ channel }: { channel: ChannelType }) => {
       case 'Push':
         return <MobileFilled style={{ fontSize: '18px' }} />;
       case 'Whatsapp':
-        return <WechatFilled style={{ fontSize: '18px' }} />;
+        return <WechatFilled style={{ fontSize: '24px' }} />;
       default:
         return null;
     }
