@@ -165,10 +165,12 @@ type CurrentAction = {
 type CurrentDispatchType = (args: CurrentAction) => CurrentAction | any;
 
 // Home page interfaces
-interface IHomePageState {
+interface IPageState {
   loading: boolean;
   error: string;
-  data: null | object;
+  homePageData: null | object;
+  providersList: null | object;
+  allProviders: null | object;
 }
 
 /* Raven Interfaces */

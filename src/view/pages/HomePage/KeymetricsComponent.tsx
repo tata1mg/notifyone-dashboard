@@ -31,7 +31,7 @@ const KeymetricsComponent = ({ keyMetrics }: { keyMetrics: any }) => {
   };
   return (
     <>
-      <Card title={title} style={{ width: '80%', marginBottom: 12 }}>
+      <Card title={title} className="keyMetricsCard">
         <Row>{sub_title}</Row>
         <Row>
           <Col span={24}>

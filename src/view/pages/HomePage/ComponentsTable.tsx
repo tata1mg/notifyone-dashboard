@@ -27,7 +27,11 @@ const ComponentsTable = ({ components }: { components: object[] }) => {
   ];
 
   useEffect(() => {
-    setTableData(components);
+    if (components.length) {
+      setTableData(components);
+    } else {
+      setTableData([]);
+    }
   }, [components]);
 
   return <Table dataSource={tableData} columns={columns} pagination={false} />;

@@ -14,6 +14,7 @@ import {
   FormOutlined,
   AppstoreOutlined,
   HomeOutlined,
+  UnorderedListOutlined,
 } from '@ant-design/icons';
 
 import './sideNav.css';
@@ -47,6 +48,11 @@ const getItem = (
 
 const menuItems = [
   getItem('home', <Link to="/home">Home</Link>, <HomeOutlined />),
+  getItem(
+    'providers',
+    <Link to="/providers">Providers</Link>,
+    <UnorderedListOutlined />
+  ),
   getItem('text_only', 'Text Only', <FileTextOutlined />, [
     getItem('sms', <Link to="/templates/sms">SMS</Link>, <MessageOutlined />),
     getItem(
@@ -91,6 +97,9 @@ const SideNav = ({ collapsed, setCollapsed }: SideNavProps) => {
     switch (currentPathname) {
       case '/home':
         highlightedMenu = ['home'];
+        break;
+      case '/providers':
+        highlightedMenu = ['providers'];
         break;
       case '/templates/sms':
         highlightedMenu = ['sms'];

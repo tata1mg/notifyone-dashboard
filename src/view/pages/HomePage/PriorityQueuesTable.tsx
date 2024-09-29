@@ -36,7 +36,11 @@ const PriorityQueuesTable = ({
   ];
 
   useEffect(() => {
-    setTableData(priorityQueues);
+    if (priorityQueues.length) {
+      setTableData(priorityQueues);
+    } else {
+      setTableData([]);
+    }
   }, [priorityQueues]);
 
   return <Table dataSource={tableData} columns={columns} pagination={false} />;

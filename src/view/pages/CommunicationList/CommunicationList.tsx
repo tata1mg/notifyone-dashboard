@@ -351,7 +351,7 @@ const CommunicationList: React.FC = () => {
 
   return (
     <Fragment>
-      <div className="px-4 pt-4 communication-list-wrap content-wrapper">
+      <div className="content-wrapper">
         <Row className="mb-4" align="middle" justify="center">
           <Col className="mr-2">
             <FormattedMessage id="type" />
