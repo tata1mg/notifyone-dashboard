@@ -669,6 +669,27 @@ const CommunicationTemplate: React.FC<CommunicationTemplateProps> = ({
           </Row>
         </>
       )}
+      {Object.keys(payloads).length == 0 && (
+        <>
+          <Divider />
+          <Row className="pt-2" gutter={[16, 10]}>
+            <Col className="text-left" span={24}>
+              {getPayloadPreviewLabel()}
+            </Col>
+          </Row>
+          <Row className="my-4">
+            <Col span={24}>
+              <Editor
+                value={{}}
+                onChange={(updatedJson: any) =>
+                  onPayloadValueUpdate(updatedJson)
+                }
+                mode="code"
+              />
+            </Col>
+          </Row>
+        </>
+      )}
       {eventDetails.event_type !== COMMUNICATION_TYPE.Whatsapp && (
         <Row className="pt-8" justify="end">
           <Col>

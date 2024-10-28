@@ -26,7 +26,7 @@ const NewEventCreation = () => {
 
   return (
     <Fragment>
-      <div className="margin">
+      <div className="content-wrapper">
         <Spin spinning={loading}>
           <CreateForm
             formConfig={{
