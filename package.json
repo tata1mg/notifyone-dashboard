@@ -25,7 +25,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
     "@redux-devtools/extension": "^3.2.2",
-    "@sentry/react": "^6.16.1",
+    "@sentry/react": "^8.35.0",
     "@sentry/tracing": "^6.16.1",
     "@tata1mg/formzen": "^0.0.1-beta.2",
     "antd": "^4.18.2",
