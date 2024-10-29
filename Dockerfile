@@ -35,8 +35,8 @@ RUN npm i --legacy-peer-deps
 # RUN cd ../
 
 # Start the FE service
-CMD ["npm", "run", "dev"]
+#CMD ["npm", "run", "dev"]
 
 # Start the server
 # RUN cd server/
-# CMD ["npm", "start"]
+CMD ["npm", "start"]
