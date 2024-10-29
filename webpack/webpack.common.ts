@@ -7,7 +7,6 @@ import AppConfig from '../src/config.json';
 import { allowedConfigs, filterConfig } from '../src/config';
 
 const communicationKeys = {
-  ...AppConfig.common,
   ...AppConfig.communication,
 };
 

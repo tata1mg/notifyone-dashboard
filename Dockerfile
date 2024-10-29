@@ -1,4 +1,5 @@
-FROM --platform=linux/amd64 node:20.4.0-slim
+ARG SYS_PLATFORM
+FROM --platform=$SYS_PLATFORM node:20.4.0-slim
 
 # Args passed in the build command
 ARG SERVICE_NAME
@@ -29,13 +30,13 @@ WORKDIR /home/ubuntu/apps/$SERVICE_NAME
 COPY . .
 
 RUN npm i --legacy-peer-deps
-RUN cd src/server/
-RUN npm i --legacy-peer-deps
-RUN cd ../../
+# RUN cd server/
+# RUN npm i --legacy-peer-deps
+# RUN cd ../
 
 # Start the FE service
 CMD ["npm", "run", "dev"]
 
 # Start the server
-RUN cd src/server/
-CMD ["npm", "start"]
+# RUN cd server/
+# CMD ["npm", "start"]

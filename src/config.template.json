@@ -1,0 +1,12 @@
+{
+    "communication": {
+        "appUrl": "",
+        "communicationAppUrlPort": 8000,
+        "emailEventsUpdate": "",
+        "previewEmailEvent": "",
+        "sentry": {
+            "dns": ""
+        },
+        "serverDomain": "//base api url"
+    }
+}

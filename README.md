@@ -27,12 +27,25 @@ git clone [NotifyOne Dashboard](https://github.com/tata1mg/notifyone-dashboard.g
 # Navigate to the project directory
 cd notifyone-dashboard
 
-# Install dependencies
-npm install
+# Check node version
+node --version
+# Install node 20.4.0 if not installed (nvm must be installed before hand)
+nvm install 20.4.0
+
+# Install dependencies (strictly use --legacy-peer-deps)
+npm install --legacy-peer-deps
+
+# Create the config json file taking reference from config template in src folder
+# Update the base api url in config
+cd src
+cp config.template.json config.json
+cd ..
 
 # Start the development server
 npm start
 
 ```
+
 ## Starting the backend server
+
 Remember, before running the dashboard, make sure that the backend is running. To run the backend, checkout the readme of the [NotifyOne](https://github.com/tata1mg/notifyone) repository.
