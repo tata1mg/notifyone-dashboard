@@ -1,0 +1,16 @@
+.sider-row-wrapper {
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  height: 80px;
+}
+
+.sider-row-wrapper-padding {
+  padding-left: 24px;
+}
+
+.sider-row-collapse-icon {
+  min-height: 50px;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}

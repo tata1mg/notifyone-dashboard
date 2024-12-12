@@ -1,0 +1,36 @@
+.leftPanel {
+    width: 35%;
+    height: 100%;
+}
+
+.rightPanel {
+    width: 75%;
+    height: 100%;
+}
+
+.channel-card {
+    /* border: 1px solid; */
+    padding: 24px;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* margin-bottom: 48px; */
+}
+
+.channel-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    background-color: #e6f7ff;
+}
+
+.channel-card-info {}
+
+.channel-card-button {
+    /* color: black; */
+    font-size: 14px;
+}
+
+.keyMetricsCard {
+    width: 80%;
+    margin-bottom: 12px
+}
