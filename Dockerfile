@@ -34,6 +34,13 @@ RUN npm i
 # RUN npm i --legacy-peer-deps
 # RUN cd ../
 
+# Create a limited access user and change ownership of the application directory
+RUN useradd -m appuser && \
+    chown -R appuser:appuser /home/ubuntu/apps/$SERVICE_NAME
+
+# Switch to limited access user
+USER appuser
+
 # Start the FE service
 CMD ["npm", "start"]
 
